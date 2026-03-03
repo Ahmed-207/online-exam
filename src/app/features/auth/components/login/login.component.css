@@ -1,0 +1,13 @@
+:host ::ng-deep .p-inputtext{
+    border-radius: 0;
+}
+:host ::ng-deep .p-password-input{
+    width: 100%;
+}
+:host ::ng-deep .p-inputtext:focus{
+    --p-inputtext-focus-border-color:blue;
+}
+
+label, span{
+    color: Gray;
+}

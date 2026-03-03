@@ -1,0 +1,15 @@
+.auth-caption{
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-caption::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:url('/assets/images/Overlay.png');
+  background-size: cover;
+  filter: blur(200px); 
+  z-index: -1;      
+  transform: scale(1.1);
+}

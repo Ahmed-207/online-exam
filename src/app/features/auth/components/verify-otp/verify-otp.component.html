@@ -1,0 +1,23 @@
+<div class="form-container grid gap-10">
+    <div class="size-10 border mb-4 border-gray-200 flex items-center justify-center">
+        <i class="pi pi-arrow-left"></i>
+    </div>
+    <h2 class="font-bold text-[30px] pb-3">Verify OTP</h2>
+    <p class="text-gray-600">Please enter the 6-digits code we have sent to: <span class="text-black">user@example.com.
+            <a class="text-blue-600" href="">Edit</a></span></p>
+    <form class="grid md:grid-cols-12 gap-4" action="">
+        <div class="card flex justify-center col-span-12 pb-6">
+            <p-inputotp [length]="6" />
+        </div>
+        @if(counterFlag){
+        <span class="text-center text-gray-600 pb-3 col-span-12">You can request another code in: 60s</span>
+        }@else {
+        <span class="text-center text-gray-600 pb-3 col-span-12">Didn’t receive the code? <a class="text-blue-600"
+                href="">Resend</a></span>
+        }
+        <div class="col-span-12">
+            <app-main-button [btnClass]="'1'" [content]="'verify'"></app-main-button>
+        </div>
+    </form>
+    <span class="text-center">already have an account ? <a class="text-blue-600" href="">Login now</a></span>
+</div>

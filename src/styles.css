@@ -1,3 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+@import "primeicons/primeicons.css";
+
+
+h1,h2,h3,h4,h5,h6{
+    font-family: "Inter", sans-serif;
+}
+
+p,li,a,button,span, label{
+    font-family: "Geist Mono", monospace;
+}
+
+
+@layer components{
+    .btn-main{
+        @apply bg-blue-600 py-4 px-8 text-white hover:bg-blue-700 transition-colors duration-200 disabled:bg-gray-200 disabled:text-gray-400
+    }
+    .btn-destructive{
+        @apply bg-red-600 py-4 px-8 text-white hover:bg-red-700 transition-colors duration-200 disabled:bg-gray-200 disabled:text-gray-400
+    }
+    .btn-secondary{
+        @apply bg-gray-200 py-4 px-8 text-black hover:bg-gray-300 transition-colors duration-200 disabled:bg-gray-200 disabled:text-gray-400
+    }
+    .btn-outline{
+        @apply bg-blue-50  py-4 px-8 border  border-blue-600 text-black hover:bg-blue-200 transition-colors duration-200 disabled:bg-gray-200 disabled:text-gray-400
+    }
+}

@@ -1,0 +1,7 @@
+:host ::ng-deep .p-password-input{
+    border-radius: 0;
+    width: 100%;
+}
+label{
+    color: grey;
+}

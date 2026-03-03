@@ -1,0 +1,42 @@
+<section class="grid md:grid-cols-2 min-h-screen">
+    <div class="auth-caption h-full hidden md:flex p-29 flex-col items-start gap-20">
+        <div class="main-brand flex items-center justify-between">
+            <lucide-angular [img]="folderCode" [color]="'blue'" [size]="30" class="my-icon me-2"></lucide-angular>
+            <span class="text-blue-600">My Exam</span>
+        </div>
+        <div class="flex flex-col items-start gap-10">
+            <h1 class="heading text-[30px] font-bold">
+                Empower your learning journey with our smart exam platform
+            </h1>
+            <ul class="items-list list-none flex flex-col items-start justify-between gap-10">
+                <li class="item flex items-start justify-between"><lucide-angular [img]="brain" [color]="'blue'"
+                        [size]="30" class="my-icon me-2"></lucide-angular>
+                    <div class="item-content">
+                        <span class="text-blue-600 text-[20px] font-semibold">Tailored Diplomas</span>
+                        <p class="text-gray-700 text-[16px]">Choose from specialized tracks like Frontend, Backend, and
+                            Mobile Development.</p>
+                    </div>
+                </li>
+                <li class="item flex items-start justify-between"><lucide-angular [img]="bookOpenCheck" [color]="'blue'"
+                        [size]="30" class="my-icon me-2"></lucide-angular>
+                    <div class="item-content">
+                        <span class="text-blue-600 text-[20px] font-semibold">Focused Exams</span>
+                        <p class="text-gray-700 text-[16px]">Access topic-specific tests including HTML, CSS,
+                            JavaScript, and more.</p>
+                    </div>
+                </li>
+                <li class="item flex items-start justify-between"><lucide-angular [img]="rectangleEllipsis"
+                        [color]="'blue'" [size]="30" class="my-icon me-2"></lucide-angular>
+                    <div class="item-content">
+                        <span class="text-blue-600 text-[20px] font-semibold">Smart Multi-Step Forms</span>
+                        <p class="text-gray-700 text-[16px]">Choose from specialized tracks like Frontend, Backend, and
+                            Mobile Development.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="h-full p-29">
+        <router-outlet></router-outlet>
+    </div>
+</section>
