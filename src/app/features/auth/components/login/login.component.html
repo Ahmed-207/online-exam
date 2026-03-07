@@ -1,13 +1,13 @@
-<div class="form-container grid gap-10">
+<div class="form-container grid gap-10 md:gap-5">
     <h2 class="font-bold text-[30px] pb-6">Login</h2>
-    <form class="grid md:grid-cols-12 gap-4" action="">
-        <div class="card flex justify-center md:col-span-12">
+    <form class="grid grid-cols-12 gap-4" action="">
+        <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="userName">Username</label>
                 <input class="w-full" pInputText id="userName" aria-describedby="username" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-12">
+        <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="password">Password</label>
                 <p-password id="password" [toggleMask]="true" autocomplete="off" />
@@ -18,5 +18,5 @@
             <app-main-button [btnClass]="'1'" [content]="'login'"></app-main-button>
         </div>
     </form>
-    <span class="text-center">already have an account ? <a class="text-blue-600" href="">Login now</a></span>
+    <span class="text-center">don't have an account ? <a class="text-blue-600" href="">register now</a></span>
 </div>

@@ -1,43 +1,43 @@
-<div class="form-container grid gap-10">
-    <h2 class="font-bold text-[30px] pb-6">Create Account</h2>
-    <form class="grid md:grid-cols-12 gap-4" action="">
-        <div class="card flex justify-center md:col-span-6">
+<div class="form-container grid gap-10 md:gap-5">
+    <h2 class="font-bold text-[30px] pb-4">Create Account</h2>
+    <form class="grid grid-cols-12 gap-4" action="">
+        <div class="card flex justify-center col-span-6">
             <div class="flex w-full flex-col gap-2">
                 <label for="firstName">First Name</label>
                 <input class="w-full" pInputText id="firstName" aria-describedby="firstname" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-6">
+        <div class="card flex justify-center col-span-6">
             <div class="flex w-full flex-col gap-2">
                 <label class="w-full" for="lastName">Last Name</label>
                 <input pInputText id="lastName" aria-describedby="lastname" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-12">
+        <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="userName">Username</label>
                 <input class="w-full" pInputText id="userName" aria-describedby="username" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-12">
+        <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="email">E-mail</label>
                 <input class="w-full" pInputText id="email" aria-describedby="email" type="email" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-12">
+        <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="phoneNumber">Phone Number</label>
                 <p-inputnumber class="w-full" inputId="phoneNumber" type="phone" [useGrouping]="false" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-12">
+        <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="password">Password</label>
                 <p-password id="password" [toggleMask]="true" autocomplete="off" />
             </div>
         </div>
-        <div class="card flex justify-center md:col-span-12">
+        <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="rePass">confirm password</label>
                 <p-password id="rePass" [toggleMask]="true" autocomplete="off" />
