@@ -1,0 +1,15 @@
+<div class="form-container grid gap-10 md:gap-5">
+    <h2 class="font-bold text-[30px] pb-4">Create Account</h2>
+    <form class="grid grid-cols-12 gap-4" action="">
+        <div class="card flex justify-center col-span-12">
+            <div class="flex flex-col gap-2 w-full">
+                <label for="email">E-mail</label>
+                <input class="w-full" pInputText id="email" aria-describedby="email" type="email" />
+            </div>
+        </div>
+        <div class="col-span-12 pt-6">
+            <app-main-button [btnClass]="'1'" [content]="'sign up'"></app-main-button>
+        </div>
+    </form>
+    <span class="text-center">already have an account ? <a class="text-blue-600" href="">Login now</a></span>
+</div>
