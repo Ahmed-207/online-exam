@@ -1,4 +1,4 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { Component, input, InputSignal, output } from '@angular/core';
 
 @Component({
   selector: 'app-main-button',
@@ -13,5 +13,12 @@ export class MainButtonComponent {
   isLeftIcon: InputSignal<boolean | undefined> = input<boolean | undefined>();
   isRightIcon: InputSignal<boolean | undefined> = input<boolean | undefined>();
   leftIcon: InputSignal<string | undefined> = input<string | undefined>();
-  rightIcon : InputSignal<string | undefined> = input<string| undefined>();
+  rightIcon: InputSignal<string | undefined> = input<string | undefined>();
+  buttonType: InputSignal<string | undefined> = input<string | undefined>();
+  buttonClick = output<void>();
+  disabledFlag: InputSignal<boolean> = input<boolean>(false);
+
+  handleClick() {
+    this.buttonClick.emit();
+  }
 }

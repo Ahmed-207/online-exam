@@ -1,4 +1,5 @@
-<button class="w-full flex items-center justify-center gap-2" [class]="{
+<button class="w-full flex items-center justify-center gap-2" [type]="buttonType()" [disabled]="disabledFlag()"
+    (click)="handleClick()" [class]="{
     'btn-main' : btnClass() === '1',
     'btn-secondary' : btnClass() === '2',
     'btn-destructive' : btnClass() === '3',

@@ -1,5 +1,5 @@
-<section class="grid md:grid-cols-2 min-h-screen">
-    <div class="auth-caption h-full hidden md:flex p-20 flex-col items-start gap-20">
+<section class="grid md:grid-cols-12 min-h-screen">
+    <div class="auth-caption h-full hidden md:flex md:col-span-6 p-20 flex-col items-start gap-20">
         <div class="main-brand flex items-center justify-between">
             <lucide-angular [img]="folderCode" [color]="'blue'" [size]="30" class="my-icon me-2"></lucide-angular>
             <span class="text-blue-600">My Exam</span>
@@ -36,7 +36,7 @@
             </ul>
         </div>
     </div>
-    <div class="h-full flex items-center justify-center p-20">
+    <div class="h-full flex items-center justify-center md:col-span-6 p-5 w-full">
         <router-outlet></router-outlet>
     </div>
 </section>

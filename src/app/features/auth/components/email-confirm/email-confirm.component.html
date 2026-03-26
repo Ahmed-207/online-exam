@@ -1,15 +1,32 @@
-<div class="form-container grid gap-10 md:gap-5">
-    <h2 class="font-bold text-[30px] pb-4">Create Account</h2>
-    <form class="grid grid-cols-12 gap-4" action="">
+<div class="form-container grid grid-cols-12 gap-10 md:gap-5">
+    <h2 class="font-bold text-[30px] col-span-12 pb-4">Create Account</h2>
+    <form class="grid grid-cols-12 col-span-12 gap-4" [formGroup]="emailConfirm()" (ngSubmit)="submitEmail()">
         <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="email">E-mail</label>
-                <input class="w-full" pInputText id="email" aria-describedby="email" type="email" />
+                <input class="w-full" pInputText formControlName="email" id="email" aria-describedby="email"
+                    type="email" />
+                @let emailInput = emailConfirm().get('email');
+                @if(emailInput?.invalid && emailInput?.touched){
+                @if(emailInput?.getError('required')){
+                <p class="my-1 text-red-500 text-[16px]">please enter your email</p>
+                }@else if(emailInput?.getError('email')){
+                <p class="my-1 text-red-500 text-[16px]">please enter a valid email format ex:john@doe.com</p>
+                }
+                }
             </div>
         </div>
+        @if(errorFlag()){
+        <div class="alert-container col-span-12 bg-red-50 border border-red-600 flex items-center justify-center p-4">
+            <p class=" text-red-500 text-[16px]">{{errorMsg()}}</p>
+        </div>
+        }
         <div class="col-span-12 pt-6">
-            <app-main-button [btnClass]="'1'" [content]="'sign up'"></app-main-button>
+            <app-main-button [btnClass]="'4'" [content]="'sign up'" [buttonType]="'submit'"
+                [isRightIcon]=" buttonFlag() ? true : undefined " [disabledFlag]="buttonFlag()"
+                [rightIcon]="buttonFlag() ? 'pi pi-spin pi-spinner': undefined"></app-main-button>
         </div>
     </form>
-    <span class="text-center">already have an account ? <a class="text-blue-600" href="">Login now</a></span>
+    <span class="text-center col-span-12">already have an account ? <a class="text-blue-600" href="">Login
+            now</a></span>
 </div>
