@@ -3,21 +3,28 @@
         <i class="pi pi-arrow-left"></i>
     </div>
     <h2 class="font-bold text-[30px] pb-3">Create Account</h2>
-     <h3 class="font-bold text-[25px] pb-4 text-blue-600">Verify OTP</h3>
-    <p class="text-gray-600">Please enter the 6-digits code we have sent to: <span class="text-black">user@example.com.
-            <a class="text-blue-600" href="">Edit</a></span></p>
-    <form class="grid grid-cols-12 gap-4" action="">
+    <h3 class="font-bold text-[25px] pb-4 text-blue-600">Verify OTP</h3>
+    <p class="text-gray-600">Please enter the 6-digits code we have sent to: <span class="text-black">{{storedEmail()}}
+            <span class="text-blue-600 cursor-pointer" (click)="resetEmail()">Edit</span></span></p>
+    <form class="grid grid-cols-12 gap-4" [formGroup]="verifyForm()" (ngSubmit)="sendCodeToVerify()">
         <div class="card flex justify-center col-span-12 pb-6">
-            <p-inputotp [length]="6" />
+            <p-inputotp [length]="6" formControlName="code" />
         </div>
-        @if(counterFlag){
-        <span class="text-center text-gray-600 pb-3 col-span-12">You can request another code in: 60s</span>
+        @if(counterFlag()){
+        <span class="text-center text-gray-600 pb-3 col-span-12">You can request another code in: {{counter()}}s</span>
         }@else {
-        <span class="text-center text-gray-600 pb-3 col-span-12">Didn’t receive the code? <a class="text-blue-600"
-                href="">Resend</a></span>
+        <span class="text-center text-gray-600 pb-3 col-span-12">Didn’t receive the code? <span (click)="resendCode()"
+                class="text-blue-600 cursor-pointer">Resend</span></span>
+        }
+        @if(errorFlag()){
+        <div class="col-span-12">
+            <app-alert-message [alertContent]="errorMsg()"></app-alert-message>
+        </div>
         }
         <div class="col-span-12">
-            <app-main-button [btnClass]="'4'" [content]="'verify'"></app-main-button>
+            <app-main-button [btnClass]="'4'" [content]="'verify'" [buttonType]="'submit'"
+                [isRightIcon]=" buttonFlag() ? true : undefined " [disabledFlag]="buttonFlag()"
+                [rightIcon]="buttonFlag() ? 'pi pi-spin pi-spinner': undefined"></app-main-button>
         </div>
     </form>
 </div>

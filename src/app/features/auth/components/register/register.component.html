@@ -1,39 +1,39 @@
 <div class="form-container grid gap-10 md:gap-5">
     <h2 class="font-bold text-[30px]">Create Account</h2>
     <h3 class="font-bold text-[25px] pb-4 text-blue-600">Tell us more about you</h3>
-    <form class="grid grid-cols-12 gap-4" action="">
+    <form class="grid grid-cols-12 gap-4" [formGroup]="registerForm()">
         <div class="card flex justify-center col-span-6">
             <div class="flex w-full flex-col gap-2">
                 <label for="firstName">First Name</label>
-                <input class="w-full" pInputText id="firstName" aria-describedby="firstname" />
+                <input class="w-full" formControlName="firstName" pInputText id="firstName" aria-describedby="firstname" />
             </div>
         </div>
         <div class="card flex justify-center col-span-6">
             <div class="flex w-full flex-col gap-2">
                 <label class="w-full" for="lastName">Last Name</label>
-                <input pInputText id="lastName" aria-describedby="lastname" />
+                <input pInputText id="lastName" formControlName="lastName" aria-describedby="lastname" />
             </div>
         </div>
         <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="userName">Username</label>
-                <input class="w-full" pInputText id="userName" aria-describedby="username" />
+                <input class="w-full" pInputText id="userName" formControlName="username" aria-describedby="username" />
             </div>
         </div>
         <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="email">E-mail</label>
-                <input class="w-full" pInputText id="email" aria-describedby="email" type="email" />
+                <input class="w-full" pInputText id="email" formControlName="email" aria-describedby="email" type="email" />
             </div>
         </div>
         <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="phoneNumber">Phone Number</label>
-                <p-inputnumber class="w-full" inputId="phoneNumber" type="phone" [useGrouping]="false" />
+                <p-inputnumber class="w-full" inputId="phoneNumber" formControlName="phone" type="phone" [useGrouping]="false" />
             </div>
         </div>
         <div class="col-span-12 pt-6">
-            <app-main-button [btnClass]="'4'" [content]="'sign up'"></app-main-button>
+            <app-main-button [btnClass]="'4'" [content]="'sign up'" [buttonType]="'submit'"></app-main-button>
         </div>
     </form>
 </div>

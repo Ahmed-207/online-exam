@@ -17,8 +17,8 @@
             </div>
         </div>
         @if(errorFlag()){
-        <div class="alert-container col-span-12 bg-red-50 border border-red-600 flex items-center justify-center p-4">
-            <p class=" text-red-500 text-[16px]">{{errorMsg()}}</p>
+        <div class="col-span-12">
+            <app-alert-message [alertContent]="errorMsg()"></app-alert-message>
         </div>
         }
         <div class="col-span-12 pt-6">
