@@ -88,7 +88,7 @@ export class VerifyOtpComponent implements OnInit {
       this.errorFlag.set(false);
       this.subscriptionRef().unsubscribe;
       this.subscriptionRef.set(this._authService.verify({ code: this.verifyForm().get('code')?.value, email: this.storedEmail() }).subscribe({
-        next: (res) => {
+        next: (res:any) => {
           this.buttonFlag.set(false);
           console.log(res);
           this._router.navigate(['/register'], {

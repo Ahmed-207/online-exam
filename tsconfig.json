@@ -16,7 +16,8 @@
     "module": "preserve",
      "paths": {
       "auth": [
-        "./dist/auth"
+        "./dist/auth",
+        "./projects/auth/src/public-api.ts"
       ]
     }
   },
