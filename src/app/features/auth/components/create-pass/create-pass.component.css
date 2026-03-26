@@ -1,6 +1,7 @@
 
 :host ::ng-deep .p-password-input{
     width: 100%;
+    border-radius: 0;
 }
 
 :host ::ng-deep .p-password-input:focus{

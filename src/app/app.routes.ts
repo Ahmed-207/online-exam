@@ -14,5 +14,8 @@ export const routes: Routes = [
             { path: 'verify-repass', loadComponent: () => import('./features/auth/components/verify-repass/verify-repass.component').then((c) => c.VerifyRepassComponent), title: 'Check your mail' },
             { path: 'repass', loadComponent: () => import('./features/auth/components/repass/repass.component').then((c) => c.RepassComponent), title: 'Create New Password' }
         ]
+    },
+    {
+        path: 'main', loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then((c) => c.MainLayoutComponent), title: 'Home'
     }
 ];
