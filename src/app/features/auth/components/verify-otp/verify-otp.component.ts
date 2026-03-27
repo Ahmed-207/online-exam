@@ -91,7 +91,7 @@ export class VerifyOtpComponent implements OnInit {
         next: (res:any) => {
           this.buttonFlag.set(false);
           console.log(res);
-          this._router.navigate(['/register'], {
+          this._router.navigate(['/auth/register'], {
             state: { email: this.storedEmail()}
           });
         },

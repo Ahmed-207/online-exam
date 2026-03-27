@@ -9,6 +9,12 @@ export interface RegisterReq {
 }
 
 export interface RegisterRes {
+  status: boolean
+  code: number
+  payload: Payload
+}
+
+export interface Payload {
   user: User
   token: string
 }
@@ -20,18 +26,8 @@ export interface User {
   phone: string
   firstName: string
   lastName: string
-  profilePhoto: string
   emailVerified: boolean
   phoneVerified: boolean
   role: string
   createdAt: string
-  updatedAt: string
-}
-
-export interface RegisterResAdapted {
-    firstName:string;
-    lastName:string;
-    email:string;
-    phone:string;
-    token:string;
 }

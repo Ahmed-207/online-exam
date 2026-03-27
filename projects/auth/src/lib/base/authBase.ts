@@ -8,12 +8,12 @@ import { EmailReq, EmailRes } from "../interfaces/email.interface";
 
 export abstract class Authentication {
 
-    abstract sendEmailVer(data:EmailReq):Observable<EmailRes | string>;
-    abstract verify(data: VerifyReq): Observable<VerifyRes | string>;
-    abstract register(data: RegisterReq): Observable<RegisterRes | string>;
-    abstract signIn(data: SignInReq): Observable<SignInRes | string>;
-    abstract forgetPass(data: ForgetPassReq): Observable<ForgetPassRes | string>;
-    abstract resetPass(data: ResetPassReq): Observable<ResetPassRes | string>;
+    abstract sendEmailVer(data: EmailReq): Observable<EmailRes>;
+    abstract verify(data: VerifyReq): Observable<VerifyRes>;
+    abstract register(data: RegisterReq): Observable<RegisterRes>;
+    abstract signIn(data: SignInReq): Observable<SignInRes>;
+    abstract forgetPass(data: ForgetPassReq): Observable<ForgetPassRes>;
+    abstract resetPass(data: ResetPassReq): Observable<ResetPassRes>;
 
 
 }

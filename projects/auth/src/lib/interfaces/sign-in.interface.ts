@@ -3,6 +3,12 @@ export interface SignInReq {
     password: string
 }
 export interface SignInRes {
+  status: boolean
+  code: number
+  payload: Payload
+}
+
+export interface Payload {
   user: User
   token: string
 }
@@ -14,18 +20,7 @@ export interface User {
   phone: string
   firstName: string
   lastName: string
-  profilePhoto: string
   emailVerified: boolean
   phoneVerified: boolean
   role: string
-  createdAt: string
-  updatedAt: string
-}
-
-export interface SignInResAdapted {
-    firstName:string;
-    lastName:string;
-    profilePhoto:string;
-    email:string;
-    token:string;
 }

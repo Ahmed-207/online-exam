@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     { path: '', redirectTo: 'auth', pathMatch: 'full' },
     {
-        path: '', loadComponent: () => import('./core/layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent), children: [
+        path: 'auth', loadComponent: () => import('./core/layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent), children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'email-confirm', loadComponent: () => import('./features/auth/components/email-confirm/email-confirm.component').then((c) => c.EmailConfirmComponent), title: 'Create Account' },
             { path: 'verify-otp', loadComponent: () => import('./features/auth/components/verify-otp/verify-otp.component').then((c) => c.VerifyOtpComponent), title: 'Create Account' },

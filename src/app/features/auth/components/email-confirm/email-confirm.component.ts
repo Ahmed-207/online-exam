@@ -4,7 +4,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { AlertMessageComponent } from "../../../../shared/components/alert-message/alert-message.component";
 import { Router } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class EmailConfirmComponent implements OnInit {
         next: (res:any) => {
           console.log(res);
           this.buttonFlag.set(false);
-          this._router.navigate(['/verify-otp'], {
+          this._router.navigate(['/auth/verify-otp'], {
             state: { email: this.emailConfirm().get('email')?.value }
           });
         },

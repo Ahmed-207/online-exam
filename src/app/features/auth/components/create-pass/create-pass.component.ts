@@ -1,4 +1,3 @@
-import { RegisterResAdapted } from './../../../../../../projects/auth/src/lib/interfaces/register.interface';
 import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
 import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
@@ -62,10 +61,10 @@ export class CreatePassComponent {
       this.errorFlag.set(false);
       this.subscriptionRef().unsubscribe;
       this.subscriptionRef.set(this._authService.register({ ...this.storedRegisterData(), ...this.confirmPassForm().value }).subscribe({
-        next: (res: RegisterResAdapted) => {
+        next: (res) => {
           this.buttonFlag.set(false);
           console.log(res);
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('token', res.payload.token);
           this._router.navigate(['/main'])
 
         },
