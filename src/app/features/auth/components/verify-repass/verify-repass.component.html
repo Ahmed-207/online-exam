@@ -4,8 +4,9 @@
     </div>
     <h2 class="font-bold text-[30px] pb-6">Password Reset Sent</h2>
     <span class="text-black mb-4">We have sent a password reset link to:<span
-            class="text-blue-600">user@example.com.</span></span>
+            class="text-blue-600">{{storedEmail()}}</span></span>
     <span class="mb-4">Please check your inbox and follow the instructions to reset your password</span>
     <span class="text-gray-600">If you don’t see the email within a few minutes, check your spam or junk folder.</span>
-    <span class="text-center">Don't have an account ? <a class="text-blue-600" href="">Create Yours</a></span>
+    <span class="text-center">Don't have an account ? <span class="text-blue-600 cursor-pointer"
+            (click)="navigateToRegister()">Create Yours</span></span>
 </div>

@@ -1,22 +1,44 @@
 <div class="form-container grid gap-10 md:gap-5">
     <h2 class="font-bold text-[30px] pb-6">Login</h2>
-    <form class="grid grid-cols-12 gap-4" action="">
+    <form class="grid grid-cols-12 gap-4" [formGroup]="loginForm()" (ngSubmit)="login()">
         <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="userName">Username</label>
-                <input class="w-full" pInputText id="userName" aria-describedby="username" />
+                <input class="w-full" formControlName="username" pInputText id="userName" aria-describedby="username" />
+                @let usernameInput = loginForm().get('username');
+                @if(usernameInput?.invalid && usernameInput?.touched){
+                @if(usernameInput?.getError('required')){
+                <span class="my-1 text-red-500 text-[16px] inline-block w-full">please enter your username</span>
+                }
+                }
             </div>
         </div>
         <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="password">Password</label>
-                <p-password id="password" [toggleMask]="true" autocomplete="off" />
-                <span><a class="text-blue-600 text-end block" href="">forgot your password ?</a></span>
+                <p-password id="password" formControlName="password" [toggleMask]="true" autocomplete="off" />
+                @let passwordInput = loginForm().get('password');
+                @if(passwordInput?.invalid && passwordInput?.touched){
+                @if(passwordInput?.getError('required')){
+                <span class="my-1 text-red-500 text-[16px] inline-block w-full">please enter your password</span>
+                }
+                }
+                <span class="text-blue-600 text-end inline-block w-full cursor-pointer" (click)="navigateToForgetPass()">forgot your
+                    password ?</span>
             </div>
         </div>
+        @if(errorFlag()){
+        <div class="col-span-12">
+            <app-alert-message [alertContent]="errorMsg()"></app-alert-message>
+        </div>
+        }
         <div class="col-span-12 pt-6">
-            <app-main-button [btnClass]="'1'" [content]="'login'"></app-main-button>
+            <app-main-button [btnClass]="'1'" [content]="'login'" [isRightIcon]=" buttonFlag() ? true : undefined "
+                [disabledFlag]="buttonFlag()" [rightIcon]="buttonFlag() ? 'pi pi-spin pi-spinner': undefined"
+                [buttonType]="'submit'"></app-main-button>
         </div>
     </form>
-    <span class="text-center">don't have an account ? <a class="text-blue-600" href="">register now</a></span>
+    <span class="text-center inline-block w-full text-gray-600">don't have an account ? <span class="text-blue-600 cursor-pointer inline-bock"
+            (click)="navigateToRegister()">register
+            now</span></span>
 </div>

@@ -45,7 +45,8 @@ export class EmailConfirmComponent implements OnInit {
         next: (res:any) => {
           console.log(res);
           this.buttonFlag.set(false);
-          this._router.navigate(['/auth/verify-otp'], {
+          this.errorFlag.set(false);
+          this._router.navigate(['/verify-otp'], {
             state: { email: this.emailConfirm().get('email')?.value }
           });
         },

@@ -9,9 +9,9 @@
                 @let passInput = confirmPassForm().get('password');
                 @if(passInput?.invalid && passInput?.touched){
                 @if(passInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter strong password</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter strong password</span>
                 }@else if(passInput?.getError('pattern')){
-                <p class="my-1 text-red-500 text-[16px]">please enter a suitable formatted password</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter a suitable formatted password</span>
                 }
                 }
             </div>
@@ -23,11 +23,11 @@
                 @let repassInput = confirmPassForm().get('confirmPassword');
                 @if(repassInput?.invalid && repassInput?.touched){
                 @if(repassInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter strong password</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter strong password</span>
                 }@else if(repassInput?.getError('pattern')){
-                <p class="my-1 text-red-500 text-[16px]">please enter a suitable formatted password</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter a suitable formatted password</span>
                 }@else if(confirmPassForm().errors){
-                <p class="my-1 text-red-500 text-[16px]">ensure the confirmed password is identical with password</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">ensure the confirmed password is identical with password</span>
                 }
                 }
             </div>

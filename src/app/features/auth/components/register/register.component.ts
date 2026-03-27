@@ -42,7 +42,7 @@ export class RegisterComponent {
     if (this.registerForm().valid) {
       this.buttonFlag.set(true);
       console.log(this.registerForm().value);
-      this._router.navigate(['/auth/create-pass'], {
+      this._router.navigate(['/create-pass'], {
         state: {
           username: this.registerForm().get('username')?.value,
           email: this.registerForm().get('email')?.value,

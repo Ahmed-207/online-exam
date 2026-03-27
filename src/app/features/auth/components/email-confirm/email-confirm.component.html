@@ -9,9 +9,9 @@
                 @let emailInput = emailConfirm().get('email');
                 @if(emailInput?.invalid && emailInput?.touched){
                 @if(emailInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter your email</p>
+                <span class="my-1 w-full inline-block text-red-500 text-[16px]">please enter your email</span>
                 }@else if(emailInput?.getError('email')){
-                <p class="my-1 text-red-500 text-[16px]">please enter a valid email format ex:john@doe.com</p>
+                <span class="my-1 w-full inline-block text-red-500 text-[16px]">please enter a valid email format ex:john@doe.com</span>
                 }
                 }
             </div>
@@ -27,6 +27,6 @@
                 [rightIcon]="buttonFlag() ? 'pi pi-spin pi-spinner': undefined"></app-main-button>
         </div>
     </form>
-    <span class="text-center col-span-12">already have an account ? <a class="text-blue-600" href="">Login
+    <span class="text-center col-span-12 inline-block text-gray-600">already have an account ? <a class="text-blue-600" href="">Login
             now</a></span>
 </div>

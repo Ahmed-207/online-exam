@@ -10,7 +10,7 @@
                 @let firstNameInput = registerForm().get('firstName');
                 @if(firstNameInput?.invalid && firstNameInput?.touched){
                 @if(firstNameInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter your first name</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter your first name</span>
                 }
                 }
             </div>
@@ -22,7 +22,7 @@
                 @let lastNameInput = registerForm().get('lastName');
                 @if(lastNameInput?.invalid && lastNameInput?.touched){
                 @if(lastNameInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter your last name</p>
+                <p class="my-1 text-red-500 text-[16px] w-full inline-block">please enter your last name</p>
                 }
                 }
             </div>
@@ -34,7 +34,7 @@
                 @let userNameInput = registerForm().get('userName');
                 @if(userNameInput?.invalid && userNameInput?.touched){
                 @if(userNameInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter your username</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter your username</span>
                 }
                 }
             </div>
@@ -53,7 +53,7 @@
                 @let phoneInput = registerForm().get('phone');
                 @if(phoneInput?.invalid && phoneInput?.touched){
                 @if(phoneInput?.getError('required')){
-                <p class="my-1 text-red-500 text-[16px]">please enter your phone</p>
+                <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter your phone</span>
                 }
                 }
             </div>
