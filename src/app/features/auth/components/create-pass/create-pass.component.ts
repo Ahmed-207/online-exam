@@ -1,4 +1,4 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
 import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './create-pass.component.html',
   styleUrl: './create-pass.component.css',
 })
-export class CreatePassComponent {
+export class CreatePassComponent implements OnInit{
 
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
@@ -64,6 +64,7 @@ export class CreatePassComponent {
         next: (res) => {
           this.buttonFlag.set(false);
           console.log(res);
+          this.errorFlag.set(false);
           localStorage.setItem('token', res.payload.token);
           this._router.navigate(['/main'])
 
