@@ -1,15 +1,99 @@
-.auth-caption{
-    position: relative;
-    overflow: hidden;
+/* ── existing ── */
+.auth-caption {
+  position: relative;
+  overflow: hidden;
 }
 
 .auth-caption::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image:url('/assets/images/Overlay.png');
+  background-image: url('/assets/images/Overlay.png');
   background-size: cover;
-  filter: blur(200px); 
-  z-index: -1;      
+  filter: blur(200px);
+  z-index: -1;
   transform: scale(1.1);
+}
+
+/* ── custom diamond stepper ── */
+.stepper-wrapper {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ── diamond ── */
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.diamond-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.diamond {
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  border: 2px solid #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* done: filled blue */
+.diamond.done {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* active: filled blue (same as done in the design) */
+.diamond.active {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+/* future: hollow, lighter border */
+.diamond.future {
+  background: transparent;
+  border-color: #93c5fd;
+  /* blue-300 */
+}
+
+/* checkmark inside done diamond */
+.check {
+  display: block;
+  transform: rotate(-45deg);
+  font-size: 7px;
+  color: #fff;
+  line-height: 1;
+}
+
+/* ── connector line ── */
+.connector {
+  flex: 1;
+  height: 2px;
+  transition: border-color 0.3s;
+}
+
+.connector.solid {
+  background: #2563eb;
+}
+
+.connector.dashed {
+  background: none;
+  border-top: 2px dashed #93c5fd;
 }

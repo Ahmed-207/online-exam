@@ -9,24 +9,26 @@
                 Empower your learning journey with our smart exam platform
             </h1>
             <ul class="items-list list-none flex flex-col items-start justify-between gap-10">
-                <li class="item flex items-start justify-between"><lucide-angular [img]="brain" [color]="'blue'"
-                        [size]="30" class="my-icon me-2"></lucide-angular>
+                <li class="item flex items-start justify-between">
+                    <lucide-angular [img]="brain" [color]="'blue'" [size]="30" class="my-icon me-2"></lucide-angular>
                     <div class="item-content">
                         <span class="text-blue-600 text-[20px] font-semibold">Tailored Diplomas</span>
                         <p class="text-gray-700 text-[16px]">Choose from specialized tracks like Frontend, Backend, and
                             Mobile Development.</p>
                     </div>
                 </li>
-                <li class="item flex items-start justify-between"><lucide-angular [img]="bookOpenCheck" [color]="'blue'"
-                        [size]="30" class="my-icon me-2"></lucide-angular>
+                <li class="item flex items-start justify-between">
+                    <lucide-angular [img]="bookOpenCheck" [color]="'blue'" [size]="30"
+                        class="my-icon me-2"></lucide-angular>
                     <div class="item-content">
                         <span class="text-blue-600 text-[20px] font-semibold">Focused Exams</span>
                         <p class="text-gray-700 text-[16px]">Access topic-specific tests including HTML, CSS,
                             JavaScript, and more.</p>
                     </div>
                 </li>
-                <li class="item flex items-start justify-between"><lucide-angular [img]="rectangleEllipsis"
-                        [color]="'blue'" [size]="30" class="my-icon me-2"></lucide-angular>
+                <li class="item flex items-start justify-between">
+                    <lucide-angular [img]="rectangleEllipsis" [color]="'blue'" [size]="30"
+                        class="my-icon me-2"></lucide-angular>
                     <div class="item-content">
                         <span class="text-blue-600 text-[20px] font-semibold">Smart Multi-Step Forms</span>
                         <p class="text-gray-700 text-[16px]">Choose from specialized tracks like Frontend, Backend, and
@@ -36,7 +38,35 @@
             </ul>
         </div>
     </div>
-    <div class="h-full flex items-center justify-center md:col-span-6 p-20 w-full">
-        <router-outlet></router-outlet>
+
+    <div class="h-full flex-col items-center justify-center md:col-span-6 p-20 w-full">
+
+        @if (stepperFlag()) {
+        <div class="stepper-wrapper">
+            <div class="stepper">
+                @for (step of steps; track step.path; let i = $index; let last = $last) {
+                <!-- Diamond + label -->
+                <div class="step-item">
+                    <div class="diamond-wrap">
+                        <div class="diamond" [class]="getStepState(i)">
+                            @if (getStepState(i) === 'done') {
+                            <span class="check">✓</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connector line between steps -->
+                @if (!last) {
+                <div class="connector" [class]="getStepState(i) === 'done' ? 'solid' : 'dashed'"></div>
+                }
+                }
+            </div>
+        </div>
+        }
+
+        <div>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </section>
