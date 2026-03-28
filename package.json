@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build auth && ng build online-exam-app",
+    "build": "ng build auth && ng build OnlineExamApp",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:OnlineExamApp": "node dist/OnlineExamApp/server/server.mjs"
