@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
+import { authGuardGuard } from './core/guards/auth-guard-guard';
+import { userGuardGuard } from './core/guards/user-guard-guard';
 
 export const routes: Routes = [
     {
-        path: '', loadComponent: () => import('./core/layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent), children: [
+        path: '', loadComponent: () => import('./core/layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent), canActivate: [userGuardGuard], children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'email-confirm', loadComponent: () => import('./features/auth/components/email-confirm/email-confirm.component').then((c) => c.EmailConfirmComponent), title: 'Create Account' },
             { path: 'verify-otp', loadComponent: () => import('./features/auth/components/verify-otp/verify-otp.component').then((c) => c.VerifyOtpComponent), title: 'Create Account' },
@@ -15,6 +17,6 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'main', loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then((c) => c.MainLayoutComponent), title: 'Home'
+        path: 'main', loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then((c) => c.MainLayoutComponent), canActivate: [authGuardGuard], title: 'Home'
     }
 ];

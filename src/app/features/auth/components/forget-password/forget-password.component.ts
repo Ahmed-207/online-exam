@@ -21,7 +21,7 @@ export class ForgetPasswordComponent {
   private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
   private readonly _router = inject(Router);
-  emailConfirmForPass: WritableSignal<FormGroup> = signal({} as FormGroup);
+  emailConfirmForPass!:FormGroup;
   emailSubscription: WritableSignal<Subscription> = signal(new Subscription);
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
@@ -33,23 +33,23 @@ export class ForgetPasswordComponent {
   }
 
   createEmailForm(): void {
-    this.emailConfirmForPass.set(this._fb.group({
+    this.emailConfirmForPass = this._fb.group({
       email: [null, [Validators.required, Validators.email]]
-    }));
+    });
   }
 
   submitEmail(): void {
-    if (this.emailConfirmForPass().valid) {
+    if (this.emailConfirmForPass.valid) {
       this.buttonFlag.set(true);
       this.errorFlag.set(false);
       this.emailSubscription().unsubscribe;
-      this.emailSubscription.set(this._authService.forgetPass(this.emailConfirmForPass().value).subscribe({
+      this.emailSubscription.set(this._authService.forgetPass(this.emailConfirmForPass.value).subscribe({
         next: (res) => {
           console.log(res);
           this.buttonFlag.set(false);
           this.errorFlag.set(false);
           this._router.navigate(['/verify-repass'], {
-            state: { email: this.emailConfirmForPass().get('email')?.value }
+            state: { email: this.emailConfirmForPass.get('email')?.value }
           });
 
         },

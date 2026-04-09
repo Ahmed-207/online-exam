@@ -1,1 +1,3 @@
-export const environment = {};
+export const environment = {
+    passPattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/ 
+};

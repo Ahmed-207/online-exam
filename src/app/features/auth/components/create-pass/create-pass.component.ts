@@ -3,10 +3,12 @@ import { PasswordModule } from 'primeng/password';
 import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
 import { Router } from '@angular/router';
 import { AuthService } from 'auth';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AlertMessageComponent } from "../../../../shared/components/alert-message/alert-message.component";
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
+import { passwordMatchValidator } from '../../../../core/utilities/pass-match.validator';
 
 @Component({
   selector: 'app-create-pass',
@@ -14,13 +16,13 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './create-pass.component.html',
   styleUrl: './create-pass.component.css',
 })
-export class CreatePassComponent implements OnInit{
+export class CreatePassComponent implements OnInit {
 
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
   storedRegisterData: WritableSignal<object> = signal<object>({});
-  confirmPassForm: WritableSignal<FormGroup> = signal<FormGroup>({} as FormGroup);
+  confirmPassForm!: FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
@@ -39,28 +41,20 @@ export class CreatePassComponent implements OnInit{
   }
 
   createPassForm(): void {
-    this.confirmPassForm.set(this._fb.group({
-      password: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
-      confirmPassword: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
-    }, { validators: this.validateConfirmPassword }))
+    this.confirmPassForm = this._fb.group({
+      password: [null, [Validators.required, Validators.pattern(environment.passPattern)]],
+      confirmPassword: [null, [Validators.required, Validators.pattern(environment.passPattern)]]
+    }, { validators: passwordMatchValidator })
   }
 
-  validateConfirmPassword(g: AbstractControl) {
-
-    let gPassword = g.get('password')?.value;
-    let gRePassword = g.get('confirmPassword')?.value;
-
-    return gPassword === gRePassword ? null : { mismatch: true }
-
-  }
 
   createAccount(): void {
-    if (this.confirmPassForm().valid) {
+    if (this.confirmPassForm.valid) {
 
       this.buttonFlag.set(true);
       this.errorFlag.set(false);
       this.subscriptionRef().unsubscribe;
-      this.subscriptionRef.set(this._authService.register({ ...this.storedRegisterData(), ...this.confirmPassForm().value }).subscribe({
+      this.subscriptionRef.set(this._authService.register({ ...this.storedRegisterData(), ...this.confirmPassForm.value }).subscribe({
         next: (res) => {
           this.buttonFlag.set(false);
           console.log(res);
@@ -69,7 +63,7 @@ export class CreatePassComponent implements OnInit{
           this._router.navigate(['/main'])
 
         },
-        error: (err:HttpErrorResponse) => {
+        error: (err: HttpErrorResponse) => {
           this.buttonFlag.set(false);
           this.errorMsg.set(err.error.message)
           this.errorFlag.set(true);

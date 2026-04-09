@@ -6,7 +6,7 @@
     <h3 class="font-bold text-[25px] pb-4 text-blue-600">Verify OTP</h3>
     <p class="text-gray-600 w-full inline-block">Please enter the 6-digits code we have sent to: <span class="text-black">{{storedEmail()}}
             <span class="text-blue-600 cursor-pointer" (click)="resetEmail()">Edit</span></span></p>
-    <form class="grid grid-cols-12 gap-4" [formGroup]="verifyForm()" (ngSubmit)="sendCodeToVerify()">
+    <form class="grid grid-cols-12 gap-4" [formGroup]="verifyForm" (ngSubmit)="sendCodeToVerify()">
         <div class="card flex justify-center col-span-12 pb-6">
             <p-inputotp [length]="6" formControlName="code" />
         </div>

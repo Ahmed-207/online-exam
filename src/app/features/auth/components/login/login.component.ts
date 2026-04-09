@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
-  loginForm: WritableSignal<FormGroup> = signal<FormGroup>({} as FormGroup);
+  loginForm!:FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
@@ -35,18 +35,18 @@ export class LoginComponent implements OnInit {
 
   createLoginForm(): void {
 
-    this.loginForm.set(this._fb.group({
+    this.loginForm = this._fb.group({
       username: [null, [Validators.required]],
       password: [null, [Validators.required]]
-    }))
+    })
 
   }
 
   login():void{
-    if(this.loginForm().valid){
+    if(this.loginForm.valid){
       this.buttonFlag.set(true);
       this.subscriptionRef().unsubscribe();
-      this.subscriptionRef.set(this._authService.signIn(this.loginForm().value).subscribe({
+      this.subscriptionRef.set(this._authService.signIn(this.loginForm.value).subscribe({
         next: (res)=>{
           this.buttonFlag.set(false);
           this.errorFlag.set(false);

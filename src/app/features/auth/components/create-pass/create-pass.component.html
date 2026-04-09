@@ -1,12 +1,12 @@
 <div class="form-container grid gap-10 md:gap-5">
     <h2 class="font-bold text-[30px] pb-4">Create Account</h2>
     <h3 class="font-bold text-[25px] pb-4 text-blue-600">Create a strong password</h3>
-    <form class="grid grid-cols-12 gap-4" [formGroup]="confirmPassForm()" (ngSubmit)="createAccount()">
+    <form class="grid grid-cols-12 gap-4" [formGroup]="confirmPassForm" (ngSubmit)="createAccount()">
         <div class="card flex justify-center col-span-12">
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="password">Password</label>
                 <p-password id="password" [toggleMask]="true" formControlName="password" autocomplete="off" />
-                @let passInput = confirmPassForm().get('password');
+                @let passInput = confirmPassForm.get('password');
                 @if(passInput?.invalid && passInput?.touched){
                 @if(passInput?.getError('required')){
                 <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter strong password</span>
@@ -20,13 +20,13 @@
             <div class="flex w-full flex-col gap-2">
                 <label class="block" for="rePass">confirm password</label>
                 <p-password id="rePass" [toggleMask]="true" formControlName="confirmPassword" autocomplete="off" />
-                @let repassInput = confirmPassForm().get('confirmPassword');
+                @let repassInput = confirmPassForm.get('confirmPassword');
                 @if(repassInput?.invalid && repassInput?.touched){
                 @if(repassInput?.getError('required')){
                 <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter strong password</span>
                 }@else if(repassInput?.getError('pattern')){
                 <span class="my-1 text-red-500 text-[16px] w-full inline-block">please enter a suitable formatted password</span>
-                }@else if(confirmPassForm().errors){
+                }@else if(confirmPassForm.errors){
                 <span class="my-1 text-red-500 text-[16px] w-full inline-block">ensure the confirmed password is identical with password</span>
                 }
                 }

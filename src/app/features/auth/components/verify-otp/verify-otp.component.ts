@@ -25,7 +25,7 @@ export class VerifyOtpComponent implements OnInit {
   counter: WritableSignal<number> = signal<number>(60);
   intervalRef: any;
   storedEmail: WritableSignal<string> = signal<string>('');
-  verifyForm: WritableSignal<FormGroup> = signal<FormGroup>({} as FormGroup);
+  verifyForm!:FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
@@ -76,18 +76,18 @@ export class VerifyOtpComponent implements OnInit {
 
   createVerifyForm(): void {
 
-    this.verifyForm.set(this._fb.group({
+    this.verifyForm = this._fb.group({
       code: [null, [Validators.required]]
-    }))
+    })
 
   }
 
   sendCodeToVerify(): void {
-    if (this.verifyForm().valid) {
+    if (this.verifyForm.valid) {
       this.buttonFlag.set(true);
       this.errorFlag.set(false);
       this.subscriptionRef().unsubscribe;
-      this.subscriptionRef.set(this._authService.verify({ code: this.verifyForm().get('code')?.value, email: this.storedEmail() }).subscribe({
+      this.subscriptionRef.set(this._authService.verify({ code: this.verifyForm.get('code')?.value, email: this.storedEmail() }).subscribe({
         next: (res:any) => {
           this.buttonFlag.set(false);
           console.log(res);

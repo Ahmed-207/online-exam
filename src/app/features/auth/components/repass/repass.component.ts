@@ -3,11 +3,13 @@ import { PasswordModule } from 'primeng/password';
 import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'auth';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { AlertMessageComponent } from "../../../../shared/components/alert-message/alert-message.component";
+import { environment } from '../../../../../environments/environment';
+import { passwordMatchValidator } from '../../../../core/utilities/pass-match.validator';
 
 @Component({
   selector: 'app-repass',
@@ -22,7 +24,7 @@ export class RepassComponent implements OnInit {
   private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
   private readonly plat_id = inject(PLATFORM_ID);
-  confirmNewPassForm: WritableSignal<FormGroup> = signal<FormGroup>({} as FormGroup);
+  confirmNewPassForm!: FormGroup;
   storedToken: WritableSignal<string> = signal<string>('');
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
@@ -32,9 +34,9 @@ export class RepassComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if(isPlatformBrowser(this.plat_id)){
+    if (isPlatformBrowser(this.plat_id)) {
       const token = this._activeRoute.snapshot.queryParamMap.get('token');
-      if(token){
+      if (token) {
         this.storedToken.set(token);
       }
     }
@@ -44,28 +46,20 @@ export class RepassComponent implements OnInit {
   }
 
   createPassForm(): void {
-    this.confirmNewPassForm.set(this._fb.group({
-      newPassword: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]],
-      confirmPassword: [null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]]
-    }, { validators: this.validateConfirmPassword }))
+    this.confirmNewPassForm = this._fb.group({
+      newPassword: [null, [Validators.required, Validators.pattern(environment.passPattern)]],
+      confirmPassword: [null, [Validators.required, Validators.pattern(environment.passPattern)]]
+    }, { validators: passwordMatchValidator })
   }
 
-  validateConfirmPassword(g: AbstractControl) {
-
-    let gPassword = g.get('newPassword')?.value;
-    let gRePassword = g.get('confirmPassword')?.value;
-
-    return gPassword === gRePassword ? null : { mismatch: true }
-
-  }
 
   changePass(): void {
-    if (this.confirmNewPassForm().valid) {
+    if (this.confirmNewPassForm.valid) {
 
       this.buttonFlag.set(true);
       this.errorFlag.set(false);
       this.subscriptionRef().unsubscribe;
-      this.subscriptionRef.set(this._authService.resetPass({ token: this.storedToken(), ...this.confirmNewPassForm().value }).subscribe({
+      this.subscriptionRef.set(this._authService.resetPass({ token: this.storedToken(), ...this.confirmNewPassForm.value }).subscribe({
         next: (res) => {
           this.buttonFlag.set(false);
           this.errorFlag.set(false);

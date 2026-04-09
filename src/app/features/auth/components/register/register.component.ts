@@ -17,7 +17,7 @@ export class RegisterComponent {
   private readonly _router = inject(Router);
   private readonly _fb = inject(FormBuilder);
   storedEmail: WritableSignal<string> = signal<string>('');
-  registerForm: WritableSignal<FormGroup> = signal<FormGroup>({} as FormGroup);
+  registerForm!: FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   subscriptionRef: WritableSignal<Subscription> = signal(new Subscription);
   constructor() {
@@ -29,26 +29,26 @@ export class RegisterComponent {
     this.createRegisterForm();
   }
   createRegisterForm(): void {
-    this.registerForm.set(this._fb.group({
+    this.registerForm =this._fb.group({
       username: [null, [Validators.required]],
       email: [this.storedEmail()],
       firstName: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       phone: [null, Validators.required]
-    }))
+    })
   }
 
   submitRegisterForm(): void {
-    if (this.registerForm().valid) {
+    if (this.registerForm.valid) {
       this.buttonFlag.set(true);
-      console.log(this.registerForm().value);
+      console.log(this.registerForm.value);
       this._router.navigate(['/create-pass'], {
         state: {
-          username: this.registerForm().get('username')?.value,
-          email: this.registerForm().get('email')?.value,
-          firstName: this.registerForm().get('firstName')?.value,
-          lastName: this.registerForm().get('lastName')?.value,
-          phone: this.registerForm().get('phone')?.value
+          username: this.registerForm.get('username')?.value,
+          email: this.registerForm.get('email')?.value,
+          firstName: this.registerForm.get('firstName')?.value,
+          lastName: this.registerForm.get('lastName')?.value,
+          phone: this.registerForm.get('phone')?.value
         }
       })
     }
