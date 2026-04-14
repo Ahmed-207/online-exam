@@ -1,14 +1,14 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, OnInit, output, signal, WritableSignal } from '@angular/core';
 import { PasswordModule } from 'primeng/password';
-import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
+import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { Router } from '@angular/router';
 import { AuthService } from 'auth';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AlertMessageComponent } from "../../../../shared/components/alert-message/alert-message.component";
+import { AlertMessageComponent } from "../../../../../../shared/components/alert-message/alert-message.component";
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
-import { passwordMatchValidator } from '../../../../core/utilities/pass-match.validator';
+import { environment } from '../../../../../../../environments/environment';
+import { passwordMatchValidator } from '../../../../../../core/utilities/pass-match.validator';
 
 @Component({
   selector: 'app-create-pass',
@@ -21,18 +21,12 @@ export class CreatePassComponent implements OnInit {
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
-  storedRegisterData: WritableSignal<object> = signal<object>({});
+  storedRegisterData: InputSignal<{}> = input<{}>({});
   confirmPassForm!: FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
   subscriptionRef: WritableSignal<Subscription> = signal(new Subscription);
-
-  constructor() {
-    const nav = this._router.currentNavigation();
-    const storedRegData = nav?.extras.state;
-    this.storedRegisterData.set(storedRegData!);
-  }
 
   ngOnInit(): void {
 

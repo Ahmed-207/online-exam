@@ -1,13 +1,13 @@
-import { Component, inject, OnInit, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, OnInit, output, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { InputOtpModule } from 'primeng/inputotp';
-import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
+import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { PrimeIcons } from 'primeng/api';
 import { AuthService } from 'auth';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AlertMessageComponent } from "../../../../shared/components/alert-message/alert-message.component";
+import { AlertMessageComponent } from "../../../../../../shared/components/alert-message/alert-message.component";
 
 @Component({
   selector: 'app-verify-otp',
@@ -24,18 +24,18 @@ export class VerifyOtpComponent implements OnInit {
   counterFlag: WritableSignal<boolean> = signal<boolean>(true);
   counter: WritableSignal<number> = signal<number>(60);
   intervalRef: any;
-  storedEmail: WritableSignal<string> = signal<string>('');
+  storedEmail: InputSignal<string> = input<string>('');
   verifyForm!:FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
   subscriptionRef: WritableSignal<Subscription> = signal(new Subscription);
+  currentStateFlag = output<string>();
 
-  constructor() {
-    const nav = this._router.currentNavigation();
-    const email = nav?.extras.state?.['email'];
-    this.storedEmail.set(email);
+  otpEmit():void{
+    this.currentStateFlag.emit('register');
   }
+
 
   ngOnInit(): void {
     this.createVerifyForm();
@@ -91,9 +91,7 @@ export class VerifyOtpComponent implements OnInit {
         next: (res:any) => {
           this.buttonFlag.set(false);
           console.log(res);
-          this._router.navigate(['/register'], {
-            state: { email: this.storedEmail()}
-          });
+          this.otpEmit();
         },
         error: (err: HttpErrorResponse) => {
           this.buttonFlag.set(false);

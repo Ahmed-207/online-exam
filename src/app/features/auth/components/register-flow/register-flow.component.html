@@ -1,0 +1,39 @@
+<div class="h-full flex-col items-center justify-center md:col-span-6 p-20 w-full">
+    <div class="stepper-wrapper">
+        <div class="stepper">
+            @for (step of steps; track step.state; let i = $index; let last = $last) {
+            <div class="step-item">
+                <div class="diamond-wrap">
+                    <div class="diamond" [class]="getStepState(i)">
+                        @if (getStepState(i) === 'done') {
+                        <span class="check">✓</span>
+                        }
+                    </div>
+                </div>
+            </div>
+            @if (!last) {
+            <div class="connector" [class]="getStepState(i) === 'done' ? 'solid' : 'dashed'"></div>
+            }
+            }
+        </div>
+    </div>
+    <div>
+        @switch(currentState()){
+        @case('email confirm'){
+        <app-email-confirm (currentStateFlag)="handleCurrentState($event)"
+            (emailForParent)="recieveMailValue($event)"></app-email-confirm>
+        }
+        @case('verify otp'){
+        <app-verify-otp (currentStateFlag)="handleCurrentState($event)"
+            [storedEmail]="verifiedEmail()"></app-verify-otp>
+        }
+        @case('register'){
+        <app-register (currentStateFlag)="handleCurrentState($event)" (registerData)="recieveRegisterData($event)"
+            [storedEmail]="verifiedEmail()"></app-register>
+        }
+        @case('create password'){
+        <app-create-pass [storedRegisterData]="registerData()"></app-create-pass>
+        }
+        }
+    </div>
+</div>

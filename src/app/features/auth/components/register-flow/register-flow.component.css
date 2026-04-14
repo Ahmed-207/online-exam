@@ -1,0 +1,81 @@
+.stepper-wrapper {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.diamond-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.diamond {
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  border: 2px solid #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+
+.diamond.done {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+
+.diamond.active {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+
+
+.diamond.future {
+  background: transparent;
+  border-color: #93c5fd;
+
+}
+
+
+.check {
+  display: block;
+  transform: rotate(-45deg);
+  font-size: 7px;
+  color: #fff;
+  line-height: 1;
+}
+
+
+.connector {
+  flex: 1;
+  height: 2px;
+  transition: border-color 0.3s;
+}
+
+.connector.solid {
+  background: #2563eb;
+}
+
+.connector.dashed {
+  background: none;
+  border-top: 2px dashed #93c5fd;
+}

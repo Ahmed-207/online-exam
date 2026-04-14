@@ -1,12 +1,12 @@
 <div class="form-container grid grid-cols-12 gap-10 md:gap-5">
     <h2 class="font-bold text-[30px] col-span-12 pb-4">Create Account</h2>
-    <form class="grid grid-cols-12 col-span-12 gap-4" [formGroup]="emailConfirm()" (ngSubmit)="submitEmail()">
+    <form class="grid grid-cols-12 col-span-12 gap-4" [formGroup]="emailConfirm" (ngSubmit)="submitEmail()">
         <div class="card flex justify-center col-span-12">
             <div class="flex flex-col gap-2 w-full">
                 <label for="email">E-mail</label>
                 <input class="w-full" pInputText formControlName="email" id="email" aria-describedby="email"
                     type="email" />
-                @let emailInput = emailConfirm().get('email');
+                @let emailInput = emailConfirm.get('email');
                 @if(emailInput?.invalid && emailInput?.touched){
                 @if(emailInput?.getError('required')){
                 <span class="my-1 w-full inline-block text-red-500 text-[16px]">please enter your email</span>

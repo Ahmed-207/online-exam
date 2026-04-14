@@ -1,7 +1,7 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, output, signal, WritableSignal } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
+import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -16,17 +16,24 @@ import { Subscription } from 'rxjs';
 export class RegisterComponent {
   private readonly _router = inject(Router);
   private readonly _fb = inject(FormBuilder);
-  storedEmail: WritableSignal<string> = signal<string>('');
+  storedEmail: InputSignal<string> = input<string>(''); 
   registerForm!: FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
+  currentStateFlag = output<string>();
+  registerData = output<{}>();
   subscriptionRef: WritableSignal<Subscription> = signal(new Subscription);
-  constructor() {
-    const nav = this._router.currentNavigation();
-    const email = nav?.extras.state?.['email'];
-    this.storedEmail.set(email);
-  }
+
+
+
+
   ngOnInit(): void {
     this.createRegisterForm();
+  }
+  registerEmit():void{
+    this.currentStateFlag.emit('create password')
+  }
+  registerDataEmit():void{
+    this.registerData.emit(this.registerForm.value);
   }
   createRegisterForm(): void {
     this.registerForm =this._fb.group({
@@ -42,15 +49,8 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.buttonFlag.set(true);
       console.log(this.registerForm.value);
-      this._router.navigate(['/create-pass'], {
-        state: {
-          username: this.registerForm.get('username')?.value,
-          email: this.registerForm.get('email')?.value,
-          firstName: this.registerForm.get('firstName')?.value,
-          lastName: this.registerForm.get('lastName')?.value,
-          phone: this.registerForm.get('phone')?.value
-        }
-      })
+      this.registerEmit();
+      this.registerDataEmit();
     }
   }
 

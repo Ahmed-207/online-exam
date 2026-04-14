@@ -40,33 +40,6 @@
     </div>
 
     <div class="h-full flex-col items-center justify-center md:col-span-6 p-20 w-full">
-
-        @if (stepperFlag()) {
-        <div class="stepper-wrapper">
-            <div class="stepper">
-                @for (step of steps; track step.path; let i = $index; let last = $last) {
-                <!-- Diamond + label -->
-                <div class="step-item">
-                    <div class="diamond-wrap">
-                        <div class="diamond" [class]="getStepState(i)">
-                            @if (getStepState(i) === 'done') {
-                            <span class="check">✓</span>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Connector line between steps -->
-                @if (!last) {
-                <div class="connector" [class]="getStepState(i) === 'done' ? 'solid' : 'dashed'"></div>
-                }
-                }
-            </div>
-        </div>
-        }
-
-        <div>
-            <router-outlet></router-outlet>
-        </div>
+        <router-outlet></router-outlet>
     </div>
 </section>
