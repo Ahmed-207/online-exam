@@ -3,11 +3,12 @@ import { ChangeDetectorRef, Component, inject, PLATFORM_ID } from '@angular/core
 import { ChartModule } from 'primeng/chart';
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MainButtonComponent } from "../../../../../../../../shared/components/main-button/main-button.component";
 
 
 @Component({
   selector: 'app-exam-results',
-  imports: [ChartModule, RadioButtonModule, FormsModule],
+  imports: [ChartModule, RadioButtonModule, FormsModule, MainButtonComponent],
   templateUrl: './exam-results.component.html',
   styleUrl: './exam-results.component.css',
 })

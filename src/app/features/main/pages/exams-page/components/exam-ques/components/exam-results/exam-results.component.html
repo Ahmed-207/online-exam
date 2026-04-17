@@ -1,10 +1,11 @@
 <div>
     <h2 class="text-blue-600 text-[24px] font-medium mb-4">Results :</h2>
-    <div class="results-container grid md:grid-cols-12 gap-3">
+    <div class="results-container grid md:grid-cols-12 gap-3 mb-4">
         <div class="chart-container col-span-3 p-9 bg-blue-50 border border-blue-200 flex items-center justify-center">
             <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" [responsive]="true" />
         </div>
-        <div class="answers-container col-span-9 border border-dashed border-blue-200 p-4 max-h-[50vh] overflow-y-scroll">
+        <div
+            class="answers-container col-span-9 border border-dashed border-blue-200 p-4 max-h-[50vh] overflow-y-scroll">
             <div class="question-card">
                 <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
                 <div class="card w-full">
@@ -83,3 +84,14 @@
             </div>
         </div>
     </div>
+    <div class="btns-container flex gap-2 w-full">
+        <div class="w-[50%]">
+            <app-main-button [btnClass]="'2'" [content]="'Restart'" [isLeftIcon]="true"
+                [leftIcon]="'pi pi-refresh'"></app-main-button>
+        </div>
+        <div class="w-[50%]">
+            <app-main-button [btnClass]="'1'" [content]="'Explore'" [isRightIcon]="true"
+                [rightIcon]="'pi pi-folder'"></app-main-button>
+        </div>
+    </div>
+</div>
