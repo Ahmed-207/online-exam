@@ -1,0 +1,28 @@
+<div
+    class="group exam-card-container grid md:grid-cols-12 p-4 bg-blue-50 gap-3 hover:outline hover:outline-dashed hover:outline-blue-200 relative">
+    <div class="exam-logo-container md:col-span-1 p-4 border border-blue-300 bg-blue-100">
+        <img src="/assets/images/exam-card-photo.png" class="block w-full" alt="">
+    </div>
+    <div class="exam-content md:col-span-11 flex flex-col justify-between">
+        <div class="flex justify-between">
+            <h2 class="text-blue-600 text-[20px] font-medium">HTML Exam</h2>
+            <div class="tq-container text-[14px] font-light text-gray-800 flex items-center justify-center">
+                <span class="px-2 flex items-center gap-1 border-r border-gray-300"><lucide-angular
+                        [img]="circleQuestionMark" class="size-3.5 text-gray-800"></lucide-angular>25
+                    Question</span>
+                <span class="px-2 flex items-center gap-1"><lucide-angular [img]="timer"
+                        class="size-3.5 text-gray-800"></lucide-angular>20 minutes</span>
+            </div>
+        </div>
+        <p class="text-gray-500 text-[14px] font-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Laudantium dolor
+            ipsa modi, porro nesciunt quisquam ullam accusantium at quasi beatae quidem, aperiam minus sequi tempore.
+        </p>
+    </div>
+    <div class="hidden group-hover:block btn-layer absolute inset-0">
+        <div class="btn-container py-10 px-2 absolute -bottom-8 right-0">
+            <app-main-button [btnClass]="'1'" [content]="'start'" [isRightIcon]="true"
+                [rightIcon]="'pi pi-arrow-right'"></app-main-button>
+        </div>
+    </div>
+</div>

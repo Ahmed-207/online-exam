@@ -1,0 +1,43 @@
+/* Target the radio button input element directly */
+:host ::ng-deep .p-radiobutton .p-radiobutton-input {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+/* The outer circle (unchecked state) */
+:host ::ng-deep .p-radiobutton-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+/* Checked state - blue background */
+:host ::ng-deep .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
+    border-color: #2563eb;
+    background-color: white;
+}
+
+/* Inner white dot */
+:host ::ng-deep .p-radiobutton.p-radiobutton-checked .p-radiobutton-box::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2563eb;
+    display: block;
+}
+
+/* Hide the default icon if it conflicts */
+:host ::ng-deep .p-radiobutton-icon {
+    display: none;
+}
+
+* {
+    font-family: "Geist Mono", monospace;
+}

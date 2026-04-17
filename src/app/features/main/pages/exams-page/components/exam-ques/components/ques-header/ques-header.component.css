@@ -1,0 +1,12 @@
+:host ::ng-deep .p-progressbar {
+    border-radius: 0;
+    background: #EFF6FF;
+}
+
+:host ::ng-deep .p-progressbar-value {
+    background: #155DFC;
+}
+
+*{
+    font-family: "Geist Mono", monospace;
+}

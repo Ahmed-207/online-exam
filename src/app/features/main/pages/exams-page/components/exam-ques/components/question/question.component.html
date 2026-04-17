@@ -1,0 +1,23 @@
+<div class="question-container">
+    <span class="block text-[24px] font-medium text-blue-600 mb-4">Lorem ipsum dolor sit. ?</span>
+    <div class="card w-full">
+        <div class="flex flex-col gap-2 mb-4">
+            @for( answer of answers; track $index ){
+            <div class="field-checkbox bg-gray-50 hover:bg-gray-100 p-2">
+                <p-radiobutton [inputId]="answer" name="answer" [value]="answer" [(ngModel)]="selectedCategory" />
+                <label [for]="answer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ answer }}</label>
+            </div>
+            }
+        </div>
+        <div class="btns-container flex gap-2 w-full">
+            <div class="w-[50%]">
+                <app-main-button [btnClass]="'1'" [content]="'Previous'" [isLeftIcon]="true"
+                    [leftIcon]="'pi pi-angle-left'"></app-main-button>
+            </div>
+            <div class="w-[50%]">
+                <app-main-button [btnClass]="'1'" [content]="'Next'" [isRightIcon]="true"
+                    [rightIcon]="'pi pi-angle-right'"></app-main-button>
+            </div>
+        </div>
+    </div>
+</div>

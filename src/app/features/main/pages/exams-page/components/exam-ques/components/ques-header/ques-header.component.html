@@ -1,0 +1,16 @@
+<div class="flex items-center justify-center">
+    <div class="grow pe-4">
+        <div class="flex items-center justify-between w-full mb-2">
+            <h2 class="text-gray-800 font-medium">Frontend Development - CSS Quiz</h2>
+            <span class="text-gray-500 font-light">Question <span class="text-blue-600 font-medium">1</span> of
+                25</span>
+        </div>
+        <div class="card">
+            <p-progressbar [value]="50" [showValue]="false" />
+        </div>
+
+    </div>
+    <div class="timer-chart-container card flex justify-center w-[10%] ps-4 border-s border-gray-200">
+        <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" />
+    </div>
+</div>

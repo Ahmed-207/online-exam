@@ -1,0 +1,11 @@
+<div class="header-container flex gap-2 items-stretch w-full">
+    @if(backWardFlag()){
+    <div (click)="goBack()"
+        class="cursor-pointer flex items-center justify-center back-button-container text-blue-600 border border-blue-600 p-2">
+        <lucide-angular [img]="chevronLeft"></lucide-angular>
+    </div>
+    }
+    <header class="p-4 bg-blue-600 text-white grow">
+        <h1 class="text-[32px] font-medium">Hello from header</h1>
+    </header>
+</div>

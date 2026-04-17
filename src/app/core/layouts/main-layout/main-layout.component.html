@@ -1,1 +1,20 @@
-<p>main-layout works!</p>
+<main class="grid grid-cols-12 h-screen">
+    <nav class="md:col-span-3 bg-blue-50">
+        <app-main-sidebar></app-main-sidebar>
+    </nav>
+    <section class="md:col-span-9 flex flex-col">
+        <div class="bread-container text-[14px]">
+            <p-breadcrumb [home]="home" [model]="items">
+                <ng-template #separator> / </ng-template>
+            </p-breadcrumb>
+        </div>
+        <div class="p-6 main-route bg-gray-50 grow">
+            <div class="mb-6">
+                <app-main-header></app-main-header>
+            </div>
+            <div class="main-content">
+                <app-exam-ques></app-exam-ques>
+            </div>
+        </div>
+    </section>
+</main>

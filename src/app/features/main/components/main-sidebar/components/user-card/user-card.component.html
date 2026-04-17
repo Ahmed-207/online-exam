@@ -1,0 +1,16 @@
+<div class="grid grid-cols-12 items-center relative">
+    <div class="user-image-container col-span-2">
+        <img src="/assets/images/user-profile.avif" class="block size-full" alt="">
+    </div>
+    <div class="personal-info col-span-8 ms-1">
+        <span class="block text-blue-500 text-[14px]">user name</span>
+        <span class="block text-gray-500 text-[12px]">info@gmail.com</span>
+    </div>
+    <div class="droplist-drawer flex items-center justify-center col-span-2">
+        <span class="text-gray-500 cursor-pointer" (click)="toggleDropDown()"><lucide-angular
+                [img]="ellipsisVertical"></lucide-angular></span>
+    </div>
+    @if(dropDownFlag()){
+    <div class="absolute bottom-0 right-0 translate-x-55 z-10"><app-dropdown></app-dropdown></div>
+    }
+</div>
