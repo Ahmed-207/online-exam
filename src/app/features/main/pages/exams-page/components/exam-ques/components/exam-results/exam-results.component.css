@@ -1,0 +1,36 @@
+* {
+    font-family: monospace;
+}
+
+/* Target the radio button input element directly */
+:host ::ng-deep .p-radiobutton .p-radiobutton-input {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+
+:host ::ng-deep #wrongAnswer .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
+    border-color: red;
+    background-color: transparent;
+}
+
+
+:host ::ng-deep #wrongAnswer .p-radiobutton.p-radiobutton-checked .p-radiobutton-box::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: red;
+    display: block;
+}
+
+:host ::ng-deep #rightAnswer .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
+    border-color: green;
+    background-color: transparent;
+}
+
+
+/* Hide the default icon if it conflicts */
+:host ::ng-deep .p-radiobutton-icon {
+    display: none;
+}

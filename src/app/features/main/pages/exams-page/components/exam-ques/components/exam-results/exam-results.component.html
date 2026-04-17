@@ -1,1 +1,85 @@
-<p>exam-results works!</p>
+<div>
+    <h2 class="text-blue-600 text-[24px] font-medium mb-4">Results :</h2>
+    <div class="results-container grid md:grid-cols-12 gap-3">
+        <div class="chart-container col-span-3 p-9 bg-blue-50 border border-blue-200 flex items-center justify-center">
+            <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" [responsive]="true" />
+        </div>
+        <div class="answers-container col-span-9 border border-dashed border-blue-200 p-4 max-h-[50vh] overflow-y-scroll">
+            <div class="question-card">
+                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
+                <div class="card w-full">
+                    <div class="flex flex-col gap-2 mb-4">
+                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
+                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
+                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
+                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
+                                }}</label>
+                        </div>
+                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
+                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
+                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
+                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
+                                }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="question-card">
+                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
+                <div class="card w-full">
+                    <div class="flex flex-col gap-2 mb-4">
+                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
+                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
+                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
+                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
+                                }}</label>
+                        </div>
+                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
+                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
+                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
+                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
+                                }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="question-card">
+                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
+                <div class="card w-full">
+                    <div class="flex flex-col gap-2 mb-4">
+                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
+                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
+                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
+                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
+                                }}</label>
+                        </div>
+                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
+                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
+                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
+                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
+                                }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="question-card">
+                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
+                <div class="card w-full">
+                    <div class="flex flex-col gap-2 mb-4">
+                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
+                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
+                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
+                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
+                                }}</label>
+                        </div>
+                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
+                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
+                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
+                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
+                                }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
