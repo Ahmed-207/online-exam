@@ -54,7 +54,7 @@ export class CreatePassComponent implements OnInit {
           console.log(res);
           this.errorFlag.set(false);
           localStorage.setItem('token', res.payload.token);
-          this._router.navigate(['/main'])
+          this._router.navigate(['/home'])
 
         },
         error: (err: HttpErrorResponse) => {

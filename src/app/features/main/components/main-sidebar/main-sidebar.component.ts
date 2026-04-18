@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { LucideAngularModule, FolderCode, GraduationCap, UserRound} from 'lucide-angular';
 import { UserCardComponent } from "./components/user-card/user-card.component";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 @Component({
   selector: 'app-main-sidebar',
-  imports: [LucideAngularModule, UserCardComponent],
+  imports: [LucideAngularModule, UserCardComponent, RouterLink, RouterLinkActive],
   templateUrl: './main-sidebar.component.html',
   styleUrl: './main-sidebar.component.css',
 })

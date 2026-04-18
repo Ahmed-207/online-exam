@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, input, InputSignal } from '@angular/core';
 import { LucideAngularModule, CircleQuestionMark, Timer} from 'lucide-angular';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
+import { Exam } from '../../interfaces/diploma-exams-res.interface';
 
 @Component({
   selector: 'app-exam-card',
@@ -12,6 +13,7 @@ export class ExamCardComponent {
 
   readonly circleQuestionMark = CircleQuestionMark;
   readonly timer = Timer;
+  examData: InputSignal<Exam> = input.required<Exam>();
 
 
 }

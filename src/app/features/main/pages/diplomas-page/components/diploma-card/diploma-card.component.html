@@ -1,8 +1,7 @@
-<div class="card bg-blue-500 relative">
-    <img src="/assets/images/card-photo.png" class="block w-full h-100" alt="">
+<div class="card bg-blue-500 relative shadow-2xl cursor-pointer" (click)="navigateToDiplomaExams()">
+    <img [src]="diplomaCardData().image" class="block w-full h-120" alt="">
     <div class="diploma-content bg-blue-500/75 absolute bottom-2 left-2 right-2 p-3">
-        <h3 class="text-white font-medium">Hello from content</h3>
-        <p class="text-white/80 font-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur consequatur doloribus autem qui quas.
-            Excepturi incidunt aut dolores beatae magnam.</p>
+        <h3 class="text-white font-medium">{{diplomaCardData().title}}</h3>
+        <p class="text-white/80 font-light">{{diplomaCardData().description}}</p>
     </div>
 </div>

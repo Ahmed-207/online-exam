@@ -3,9 +3,9 @@ import { authGuardGuard } from './core/guards/auth-guard-guard';
 import { userGuardGuard } from './core/guards/user-guard-guard';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     {
         path: '', loadComponent: () => import('./core/layouts/auth-layout/auth-layout.component').then((c) => c.AuthLayoutComponent), canActivate: [userGuardGuard], children: [
-            { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'register', loadComponent: () => import('./features/auth/components/register-flow/register-flow.component').then((c) => c.RegisterFlowComponent), title: 'register' },
             { path: 'login', loadComponent: () => import('./features/auth/components/login/login.component').then((c) => c.LoginComponent), title: 'Login' },
             { path: 'forget-password', loadComponent: () => import('./features/auth/components/forget-password/forget-password.component').then((c) => c.ForgetPasswordComponent), title: 'Forgot Password ?' },
@@ -14,6 +14,14 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'main', loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then((c) => c.MainLayoutComponent), canActivate: [authGuardGuard], title: 'Home'
+        path: 'home', loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then((c) => c.MainLayoutComponent), canActivate: [authGuardGuard], title: 'Home', children: [
+            { path: '', redirectTo: 'diplomas', pathMatch: 'full' },
+            { path: 'diplomas', loadComponent: () => import('./features/main/pages/diplomas-page/diplomas-page.component').then((c) => c.DiplomasPageComponent), title: 'Diplomas' },
+            { path: 'diplomas/:id', loadComponent: () => import('./features/main/pages/exams-page/exams-page.component').then((c) => c.ExamsPageComponent), title: 'Exams' }
+        ]
+    }
+    ,
+    {
+        path: '**', loadComponent: () => import('./features/error-page/error-page.component').then((c) => c.ErrorPageComponent), title: 'No Page Found'
     }
 ];

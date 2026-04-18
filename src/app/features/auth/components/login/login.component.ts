@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
           this.errorFlag.set(false);
           console.log(res);
           localStorage.setItem('token', res.payload.token);
-          this._router.navigate(['/main']);
+          this._router.navigate(['/home']);
 
         },
         error: (err:HttpErrorResponse)=>{

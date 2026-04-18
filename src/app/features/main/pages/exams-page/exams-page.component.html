@@ -1,14 +1,7 @@
 <div class="p-4 bg-white">
+    @for(exam of diplomaExams();track $index){
     <div class="mb-2">
-        <app-exam-card></app-exam-card>
+        <app-exam-card [examData]="exam"></app-exam-card>
     </div>
-    <div class="mb-2">
-        <app-exam-card></app-exam-card>
-    </div>
-    <div class="mb-2">
-        <app-exam-card></app-exam-card>
-    </div>
-    <div class="mb-2">
-        <app-exam-card></app-exam-card>
-    </div>
+    }
 </div>

@@ -3,9 +3,6 @@ import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.
 import { VerifyOtpComponent } from "./components/verify-otp/verify-otp.component";
 import { RegisterComponent } from "./components/register/register.component";
 import { CreatePassComponent } from "./components/create-pass/create-pass.component";
-import { NavigationEnd, Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { filter, map } from 'rxjs';
 
 @Component({
   selector: 'app-register-flow',

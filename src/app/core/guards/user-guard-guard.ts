@@ -9,7 +9,7 @@ export const userGuardGuard: CanActivateFn = (route, state) => {
   if (isPlatformBrowser(plat_id)) {
     const token = localStorage.getItem('token');
     if (token) {
-      return router.parseUrl('/main')
+      return router.parseUrl('/home')
     }
   }
 
