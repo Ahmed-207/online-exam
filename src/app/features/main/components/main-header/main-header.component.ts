@@ -1,6 +1,6 @@
 import { PageTitleService } from './../../../../core/services/page-title.service';
 import { isPlatformBrowser, Location } from '@angular/common';
-import { Component, inject, input, InputSignal, OnInit, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { LucideAngularModule, ChevronLeft } from 'lucide-angular';
 import { filter } from 'rxjs';

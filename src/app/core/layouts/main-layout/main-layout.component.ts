@@ -1,4 +1,4 @@
-import { Component, output, signal, WritableSignal } from '@angular/core';
+import { Component} from '@angular/core';
 import { MainSidebarComponent } from "../../../features/main/components/main-sidebar/main-sidebar.component";
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
