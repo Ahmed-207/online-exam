@@ -2,7 +2,7 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
   {
-    path: 'diplomas/:id',
+    path: 'home/diplomas/:id',
     renderMode: RenderMode.Server
   },
   {
