@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToRegister():void{
-    this._router.navigate(['/email-confirm']);
+    this._router.navigate(['/register']);
   }
 
   navigateToForgetPass():void{
