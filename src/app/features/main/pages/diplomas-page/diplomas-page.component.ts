@@ -20,6 +20,7 @@ export class DiplomasPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.pageTitle.generalPageTitle.set('Diplomas');
+    this.pageTitle.previousPageTitle.set(this.pageTitle.generalPageTitle())
     if(isPlatformBrowser(this.plat_id)){
        this.getDiplomas();
     }

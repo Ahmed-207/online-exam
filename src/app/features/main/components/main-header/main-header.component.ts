@@ -43,6 +43,7 @@ export class MainHeaderComponent implements OnInit {
     if (this.hasHistory()) {
 
       this.location.back();
+      this.pageTitle.generalPageTitle.set(this.pageTitle.previousPageTitle());
 
     } else {
       this.router.navigate(['/home/diplomas']);

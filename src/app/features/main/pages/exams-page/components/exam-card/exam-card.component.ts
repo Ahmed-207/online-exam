@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, InputSignal, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, input, InputSignal, OnInit, signal, WritableSignal } from '@angular/core';
 import { LucideAngularModule, CircleQuestionMark, Timer} from 'lucide-angular';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { Exam } from '../../interfaces/diploma-exams-res.interface';
@@ -12,7 +12,7 @@ import { DiplomaExamsService } from '../../services/diploma-exams.service';
   templateUrl: './exam-card.component.html',
   styleUrl: './exam-card.component.css',
 })
-export class ExamCardComponent {
+export class ExamCardComponent implements OnInit{
 
   readonly circleQuestionMark = CircleQuestionMark;
   readonly timer = Timer;
@@ -22,6 +22,14 @@ export class ExamCardComponent {
   private readonly pageTitle = inject(PageTitleService);
   private readonly examService = inject(DiplomaExamsService);
   examId = computed<string>(()=> { return this.examData().id});
+
+
+  ngOnInit(): void {
+
+    this.pageTitle.previousPageTitle.set(this.pageTitle.generalPageTitle());
+
+  }
+
 
   navigateToExamQuestions():void{
 

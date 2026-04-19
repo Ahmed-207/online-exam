@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, OnInit } from '@angular/core';
 import { Diplomas } from '../../interfaces/diplomas-res.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageTitleService } from '../../../../../../core/services/page-title.service';
@@ -9,13 +9,17 @@ import { PageTitleService } from '../../../../../../core/services/page-title.ser
   templateUrl: './diploma-card.component.html',
   styleUrl: './diploma-card.component.css',
 })
-export class DiplomaCardComponent {
+export class DiplomaCardComponent implements OnInit {
 
   diplomaCardData: InputSignal<Diplomas> = input.required<Diplomas>();
   diplomaId: InputSignal<string> = input.required<string>();
   private readonly router = inject(Router);
   private readonly activeRoute = inject(ActivatedRoute);
   private readonly pageTitle = inject(PageTitleService);
+
+  ngOnInit(): void {
+    this.pageTitle.previousPageTitle.set(this.pageTitle.generalPageTitle());
+  }
 
   navigateToDiplomaExams():void{
 
