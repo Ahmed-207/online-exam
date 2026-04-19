@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { MainButtonComponent } from "../../../../../../../../shared/components/main-button/main-button.component";
 import { DiplomaExamsService } from '../../../../services/diploma-exams.service';
-import { Analytic } from '../../../../interfaces/exam-result-res.interface';
+import { Analytic, ExamResultRes } from '../../../../interfaces/exam-result-res.interface';
 import { Router } from '@angular/router';
 
 
@@ -21,19 +21,17 @@ export class ExamResultsComponent implements OnInit, OnDestroy {
   options: any;
   platformId = inject(PLATFORM_ID);
   cd = inject(ChangeDetectorRef);
-  wrongAnswer: string = 'wrong';
-  rightAnswer: string = 'right';
   private readonly examService = inject(DiplomaExamsService);
   private readonly plat_id = inject(PLATFORM_ID);
   private readonly router = inject(Router);
   examResults: WritableSignal<Analytic[]> = signal<Analytic[]>([]);
+  examResultsFullData: WritableSignal<ExamResultRes> = signal<ExamResultRes>({} as ExamResultRes);
   restartFlag = output<boolean>();
   currentIndexForParent = output<number>();
 
 
   ngOnInit() {
     if (isPlatformBrowser(this.plat_id)) {
-      this.initChart();
       this.getExamResults();
     }
   }
@@ -44,10 +42,10 @@ export class ExamResultsComponent implements OnInit, OnDestroy {
     const textColor = documentStyle.getPropertyValue('--p-text-color');
 
     this.data = {
-      labels: ['Correct : 0', 'Incorrect : 0'],
+      labels: [`Correct : ${this.examResultsFullData().payload.submission.correctAnswers}`, `Incorrect : ${this.examResultsFullData().payload.submission.wrongAnswers}`],
       datasets: [
         {
-          data: [300, 50],
+          data: [this.examResultsFullData().payload.submission.correctAnswers, this.examResultsFullData().payload.submission.totalQuestions],
           backgroundColor: [documentStyle.getPropertyValue('--p-emerald-500'), documentStyle.getPropertyValue('--p-red-500'), documentStyle.getPropertyValue('--p-gray-500')],
         }
       ]
@@ -81,7 +79,9 @@ export class ExamResultsComponent implements OnInit, OnDestroy {
     this.examService.getAllExamResults(this.examService.submissionId()).subscribe({
       next: (res) => {
         console.log(res);
+        this.examResultsFullData.set(res);
         this.examResults.set(res.payload.analytics);
+        this.initChart();
       },
       error: (err) => {
         console.log(err);
