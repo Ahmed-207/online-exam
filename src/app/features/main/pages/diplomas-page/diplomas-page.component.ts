@@ -19,8 +19,7 @@ export class DiplomasPageComponent implements OnInit {
   private readonly pageTitle = inject(PageTitleService);
 
   ngOnInit(): void {
-    this.pageTitle.generalPageTitle.set('Diplomas');
-    this.pageTitle.previousPageTitle.set(this.pageTitle.generalPageTitle())
+    this.pageTitle.updateTitle('Diplomas');
     if(isPlatformBrowser(this.plat_id)){
        this.getDiplomas();
     }

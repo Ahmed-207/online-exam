@@ -4,7 +4,7 @@
     </nav>
     <section class="md:col-span-9 flex flex-col">
         <div class="bread-container text-[14px]">
-            <p-breadcrumb [home]="home" [model]="items">
+            <p-breadcrumb [model]="pageTitleService.breadcrumbs()">
                 <ng-template #separator> / </ng-template>
             </p-breadcrumb>
         </div>

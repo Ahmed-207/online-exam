@@ -1,9 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MainSidebarComponent } from "../../../features/main/components/main-sidebar/main-sidebar.component";
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuItem } from 'primeng/api';
 import { MainHeaderComponent } from "../../../features/main/components/main-header/main-header.component";
-import { RouterOutlet } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from "@angular/router";
+import { PageTitleService } from '../../services/page-title.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-main-layout',
@@ -12,11 +14,29 @@ import { RouterOutlet } from "@angular/router";
   styleUrl: './main-layout.component.css',
 })
 export class MainLayoutComponent {
-  items: MenuItem[] = [{ label: 'Components' }, { label: 'Form' }, { label: 'InputText', routerLink: '/inputtext' }];
+
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  public pageTitleService = inject(PageTitleService);
+
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
 
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      const label = this.getRouteBreadcrumb(this.activatedRoute.root);
+      if (label && label !== this.pageTitleService.generalPageTitle()) {
+        this.pageTitleService.updateTitle(label);
+      }
+    });
+  }
 
-
-  // integrate the routing with breadcrumb ( pdf in the searches and add ons )
-
+  private getRouteBreadcrumb(route: ActivatedRoute): string | null {
+    let child = route.firstChild;
+    while (child?.firstChild) {
+      child = child.firstChild;
+    }
+    return child?.snapshot.data['breadcrumb'] || null;
+  }
 }
