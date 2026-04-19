@@ -3,6 +3,11 @@
         <app-ques-header></app-ques-header>
     </div>
     <div class="exam-content">
-        <app-exam-results></app-exam-results>
+        @if(!isExamFinished() || parentRestartFlag()){
+        <app-question [restartFlagForExam]="parentRestartFlag()"
+            (restartFlagForParentEmit)="parentRestartFlag()"></app-question>
+        }@else {
+        <app-exam-results (restartFlag)="parentRestartFlag()"></app-exam-results>
+        }
     </div>
 </div>

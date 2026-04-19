@@ -1,23 +1,29 @@
+@if(currentQuestion()){
 <div class="question-container">
-    <span class="block text-[24px] font-medium text-blue-600 mb-4">Lorem ipsum dolor sit. ?</span>
+    <span class="block text-[24px] font-medium text-blue-600 mb-4">{{currentQuestion()?.text}}</span>
     <div class="card w-full">
         <div class="flex flex-col gap-2 mb-4">
-            @for( answer of answers; track $index ){
+            @for( answer of currentQuestion()?.answers; track $index ){
             <div class="field-checkbox bg-gray-50 hover:bg-gray-100 p-2">
-                <p-radiobutton [inputId]="answer" name="answer" [value]="answer" [(ngModel)]="selectedCategory" />
-                <label [for]="answer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ answer }}</label>
+                <p-radiobutton [inputId]="answer.id" name="answer" [value]="answer.id" [formControl]="questionForm" />
+                <label [for]="answer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ answer.text }}</label>
             </div>
             }
         </div>
         <div class="btns-container flex gap-2 w-full">
             <div class="w-[50%]">
                 <app-main-button [btnClass]="'1'" [content]="'Previous'" [isLeftIcon]="true"
-                    [leftIcon]="'pi pi-angle-left'"></app-main-button>
+                    [leftIcon]="'pi pi-angle-left'" [disabledFlag]=" currentIndex() === 0 ? true : false "
+                    (buttonClick)="getPreviousQuestion()"></app-main-button>
             </div>
             <div class="w-[50%]">
                 <app-main-button [btnClass]="'1'" [content]="'Next'" [isRightIcon]="true"
-                    [rightIcon]="'pi pi-angle-right'"></app-main-button>
+                    [rightIcon]="'pi pi-angle-right'" (buttonClick)="submitAnswer()"
+                    [disabledFlag]="!buttonFlag()"></app-main-button>
             </div>
         </div>
     </div>
 </div>
+}@else {
+<span class="text-blue-500 text-center block">loading exam questions..</span>
+}

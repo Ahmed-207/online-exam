@@ -9,13 +9,13 @@
 }
 
 
-:host ::ng-deep #wrongAnswer .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
+:host ::ng-deep .user-wrong .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
     border-color: red;
     background-color: transparent;
 }
 
 
-:host ::ng-deep #wrongAnswer .p-radiobutton.p-radiobutton-checked .p-radiobutton-box::after {
+:host ::ng-deep .user-wrong .p-radiobutton.p-radiobutton-checked .p-radiobutton-box::after {
     content: '';
     width: 8px;
     height: 8px;
@@ -24,7 +24,8 @@
     display: block;
 }
 
-:host ::ng-deep #rightAnswer .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
+:host ::ng-deep .user-correct .p-radiobutton.p-radiobutton-checked .p-radiobutton-box,
+:host ::ng-deep .correct-reveal .p-radiobutton.p-radiobutton-checked .p-radiobutton-box {
     border-color: green;
     background-color: transparent;
 }

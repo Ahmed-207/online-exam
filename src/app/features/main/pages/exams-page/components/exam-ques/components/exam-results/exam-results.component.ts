@@ -1,9 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit, output, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { MainButtonComponent } from "../../../../../../../../shared/components/main-button/main-button.component";
+import { DiplomaExamsService } from '../../../../services/diploma-exams.service';
+import { Analytic } from '../../../../interfaces/exam-result-res.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,16 +15,26 @@ import { MainButtonComponent } from "../../../../../../../../shared/components/m
   templateUrl: './exam-results.component.html',
   styleUrl: './exam-results.component.css',
 })
-export class ExamResultsComponent {
+export class ExamResultsComponent implements OnInit {
 
   data: any;
   options: any;
   platformId = inject(PLATFORM_ID);
   cd = inject(ChangeDetectorRef);
-  wrongAnswer:string = 'wrong';
-  rightAnswer:string = 'right';
+  wrongAnswer: string = 'wrong';
+  rightAnswer: string = 'right';
+  private readonly examService = inject(DiplomaExamsService);
+  private readonly plat_id = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
+  examResults: WritableSignal<Analytic[]> = signal<Analytic[]>([]);
+  restartFlag = output<boolean>();
+
+
   ngOnInit() {
-    this.initChart();
+    if (isPlatformBrowser(this.plat_id)) {
+      this.initChart();
+      this.getExamResults();
+    }
   }
 
   initChart() {
@@ -61,6 +74,31 @@ export class ExamResultsComponent {
       };
     }
     this.cd.markForCheck();
+  }
+
+
+  getExamResults(): void {
+    this.examService.getAllExamResults(this.examService.submissionId()).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.examResults.set(res.payload.analytics);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  exploreDiplomas(): void {
+
+    this.router.navigate(['/home/diplomas']);
+
+  }
+
+  restartExam(): void {
+    this.examService.examFinishFlag.set(false);
+    this.examService.submissionId.set('');
+    this.restartFlag.emit(true);
   }
 
 

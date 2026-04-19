@@ -20,7 +20,7 @@
     <div class="hidden group-hover:block btn-layer absolute inset-0">
         <div class="btn-container py-10 px-2 absolute -bottom-8 right-0">
             <app-main-button [btnClass]="'1'" [content]="'start'" [isRightIcon]="true"
-                [rightIcon]="'pi pi-arrow-right'"></app-main-button>
+                [rightIcon]="'pi pi-arrow-right'" (buttonClick)="navigateToExamQuestions()"></app-main-button>
         </div>
     </div>
 </div>

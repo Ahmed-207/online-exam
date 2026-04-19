@@ -1,7 +1,9 @@
-import { Component, input, InputSignal } from '@angular/core';
+import { Component, computed, inject, input, InputSignal, signal, WritableSignal } from '@angular/core';
 import { LucideAngularModule, CircleQuestionMark, Timer} from 'lucide-angular';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { Exam } from '../../interfaces/diploma-exams-res.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PageTitleService } from '../../../../../../core/services/page-title.service';
 
 @Component({
   selector: 'app-exam-card',
@@ -14,6 +16,18 @@ export class ExamCardComponent {
   readonly circleQuestionMark = CircleQuestionMark;
   readonly timer = Timer;
   examData: InputSignal<Exam> = input.required<Exam>();
+  private readonly router = inject(Router);
+  private readonly activeRoute = inject(ActivatedRoute);
+  private readonly pageTitle = inject(PageTitleService);
+  examId = computed<string>(()=> { return this.examData().id});
+
+  navigateToExamQuestions():void{
+
+    this.router.navigate([this.examId()], {relativeTo: this.activeRoute});
+    this.pageTitle.generalPageTitle.set(this.examData().title);
+
+
+  }
 
 
 }

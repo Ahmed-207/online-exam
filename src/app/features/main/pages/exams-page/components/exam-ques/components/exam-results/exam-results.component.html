@@ -6,92 +6,50 @@
         </div>
         <div
             class="answers-container col-span-9 border border-dashed border-blue-200 p-4 max-h-[50vh] overflow-y-scroll">
+            @for(ques of examResults(); track $index){
             <div class="question-card">
-                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
+                <span class="block text-[20px] font-medium text-blue-600 mb-1">{{ques.questionText}}</span>
                 <div class="card w-full">
                     <div class="flex flex-col gap-2 mb-4">
-                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
-                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
-                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
-                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
-                                }}</label>
+
+                        <div class="field-checkbox p-2" [class.user-wrong]="!ques.isCorrect"
+                            [class.user-correct]="ques.isCorrect"
+                            [class]="ques.isCorrect ? 'bg-emerald-50' : 'bg-red-50'">
+
+                            <p-radiobutton [inputId]="ques.selectedAnswer.id + $index" [disabled]="true"
+                                [ngModel]="ques.selectedAnswer.id" [value]="ques.selectedAnswer.id" />
+
+                            <label [for]="ques.selectedAnswer.id + $index"
+                                class="ml-2 text-gray-800 text-[14px] font-medium">
+                                {{ ques.selectedAnswer.text }}
+                            </label>
                         </div>
-                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
-                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
-                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
-                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
-                                }}</label>
+
+                        @if(!ques.isCorrect){
+                        <div class="field-checkbox bg-emerald-50 p-2 correct-reveal">
+                            <p-radiobutton [disabled]="true" [inputId]="ques.correctAnswer.id + 'corr' + $index"
+                                [ngModel]="ques.correctAnswer.id" [value]="ques.correctAnswer.id" />
+
+                            <label [for]="ques.correctAnswer.id + 'corr' + $index"
+                                class="ml-2 text-gray-800 text-[14px] font-medium">
+                                {{ ques.correctAnswer.text }} (Correct Answer)
+                            </label>
                         </div>
+                        }
                     </div>
                 </div>
             </div>
-            <div class="question-card">
-                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
-                <div class="card w-full">
-                    <div class="flex flex-col gap-2 mb-4">
-                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
-                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
-                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
-                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
-                                }}</label>
-                        </div>
-                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
-                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
-                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
-                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
-                                }}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question-card">
-                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
-                <div class="card w-full">
-                    <div class="flex flex-col gap-2 mb-4">
-                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
-                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
-                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
-                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
-                                }}</label>
-                        </div>
-                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
-                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
-                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
-                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
-                                }}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="question-card">
-                <span class="block text-[20px] font-medium text-blue-600 mb-1">Lorem ipsum dolor sit. ?</span>
-                <div class="card w-full">
-                    <div class="flex flex-col gap-2 mb-4">
-                        <div id="wrongAnswer" class="field-checkbox bg-red-50  p-2">
-                            <p-radiobutton [inputId]="wrongAnswer" name="wrongAnswer" checked [disabled]="true"
-                                [value]="wrongAnswer" [(ngModel)]="wrongAnswer" />
-                            <label [for]="wrongAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ wrongAnswer
-                                }}</label>
-                        </div>
-                        <div id="rightAnswer" class="field-checkbox bg-emerald-50  p-2">
-                            <p-radiobutton [disabled]="true" [ariaChecked]="false" [inputId]="rightAnswer"
-                                name="rightAnswer" [value]="rightAnswer" [(ngModel)]="rightAnswer" />
-                            <label [for]="rightAnswer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ rightAnswer
-                                }}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
     <div class="btns-container flex gap-2 w-full">
         <div class="w-[50%]">
-            <app-main-button [btnClass]="'2'" [content]="'Restart'" [isLeftIcon]="true"
-                [leftIcon]="'pi pi-refresh'"></app-main-button>
+            <app-main-button [btnClass]="'2'" [content]="'Restart'" [isLeftIcon]="true" [leftIcon]="'pi pi-refresh'"
+                (buttonClick)="restartExam()"></app-main-button>
         </div>
         <div class="w-[50%]">
-            <app-main-button [btnClass]="'1'" [content]="'Explore'" [isRightIcon]="true"
-                [rightIcon]="'pi pi-folder'"></app-main-button>
+            <app-main-button [btnClass]="'1'" [content]="'Explore'" [isRightIcon]="true" [rightIcon]="'pi pi-folder'"
+                (buttonClick)="exploreDiplomas()"></app-main-button>
         </div>
     </div>
 </div>

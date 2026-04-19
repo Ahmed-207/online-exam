@@ -17,7 +17,8 @@ export const routes: Routes = [
         path: 'home', loadComponent: () => import('./core/layouts/main-layout/main-layout.component').then((c) => c.MainLayoutComponent), canActivate: [authGuardGuard], title: 'Home', children: [
             { path: '', redirectTo: 'diplomas', pathMatch: 'full' },
             { path: 'diplomas', loadComponent: () => import('./features/main/pages/diplomas-page/diplomas-page.component').then((c) => c.DiplomasPageComponent), title: 'Diplomas' },
-            { path: 'diplomas/:id', loadComponent: () => import('./features/main/pages/exams-page/exams-page.component').then((c) => c.ExamsPageComponent), title: 'Exams' }
+            { path: 'diplomas/:id', loadComponent: () => import('./features/main/pages/exams-page/exams-page.component').then((c) => c.ExamsPageComponent), title: 'Exams' },
+            { path: 'diplomas/:id/:examId', loadComponent: () => import('./features/main/pages/exams-page/components/exam-ques/exam-ques.component').then((c) => c.ExamQuesComponent), title: 'Questions' }
         ]
     }
     ,
