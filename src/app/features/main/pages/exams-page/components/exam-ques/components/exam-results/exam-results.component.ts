@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { ChangeDetectorRef, Component, inject, OnInit, output, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit, output, PLATFORM_ID, signal, WritableSignal, OnDestroy } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { FormsModule } from '@angular/forms';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   templateUrl: './exam-results.component.html',
   styleUrl: './exam-results.component.css',
 })
-export class ExamResultsComponent implements OnInit {
+export class ExamResultsComponent implements OnInit, OnDestroy {
 
   data: any;
   options: any;
@@ -28,6 +28,7 @@ export class ExamResultsComponent implements OnInit {
   private readonly router = inject(Router);
   examResults: WritableSignal<Analytic[]> = signal<Analytic[]>([]);
   restartFlag = output<boolean>();
+  currentIndexForParent = output<number>();
 
 
   ngOnInit() {
@@ -38,40 +39,39 @@ export class ExamResultsComponent implements OnInit {
   }
 
   initChart() {
-    if (isPlatformBrowser(this.platformId)) {
-      const documentStyle = getComputedStyle(document.documentElement);
-      const textColor = documentStyle.getPropertyValue('--p-text-color');
 
-      this.data = {
-        labels: ['Correct : 0', 'Incorrect : 0'],
-        datasets: [
-          {
-            data: [300, 50],
-            backgroundColor: [documentStyle.getPropertyValue('--p-emerald-500'), documentStyle.getPropertyValue('--p-red-500'), documentStyle.getPropertyValue('--p-gray-500')],
-          }
-        ]
-      };
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--p-text-color');
 
-      this.options = {
-        cutout: '60%',
-        plugins: {
-          legend: {
-            position: 'bottom',
-            align: 'start',
-            labels: {
-              color: textColor,
-              boxWidth: 15,
-              padding: 15,
-              align: 'vertical',
-              font: {
-                size: 14,
-                weight: '500',
-                family: 'monospace'
-              }
+    this.data = {
+      labels: ['Correct : 0', 'Incorrect : 0'],
+      datasets: [
+        {
+          data: [300, 50],
+          backgroundColor: [documentStyle.getPropertyValue('--p-emerald-500'), documentStyle.getPropertyValue('--p-red-500'), documentStyle.getPropertyValue('--p-gray-500')],
+        }
+      ]
+    };
+
+    this.options = {
+      cutout: '60%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          align: 'start',
+          labels: {
+            color: textColor,
+            boxWidth: 15,
+            padding: 15,
+            align: 'vertical',
+            font: {
+              size: 14,
+              weight: '500',
+              family: 'monospace'
             }
           }
         }
-      };
+      }
     }
     this.cd.markForCheck();
   }
@@ -98,7 +98,12 @@ export class ExamResultsComponent implements OnInit {
   restartExam(): void {
     this.examService.examFinishFlag.set(false);
     this.examService.submissionId.set('');
+    this.currentIndexForParent.emit(1)
     this.restartFlag.emit(true);
+  }
+
+  ngOnDestroy() {
+    this.examService.examFinishFlag.set(false);
   }
 
 

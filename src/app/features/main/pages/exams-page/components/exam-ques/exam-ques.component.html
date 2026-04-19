@@ -1,13 +1,27 @@
 <div class="bg-white p-4">
+    @if(!parentTimeLimit()){
     <div class="header-container mb-4">
-        <app-ques-header></app-ques-header>
+        <app-ques-header [currentQuestionIndex]="parentCurrentIndex()"
+            [examFinishFlag]="isExamFinished()"></app-ques-header>
     </div>
     <div class="exam-content">
         @if(!isExamFinished() || parentRestartFlag()){
         <app-question [restartFlagForExam]="parentRestartFlag()"
-            (restartFlagForParentEmit)="parentRestartFlag()"></app-question>
+            (restartFlagForParentEmit)="handleParentRestart($event)"
+            (currentIndexForParent)="handleIndexChange($event)"></app-question>
         }@else {
-        <app-exam-results (restartFlag)="parentRestartFlag()"></app-exam-results>
+        <app-exam-results (restartFlag)="parentRestartFlag()"
+            (currentIndexForParent)="handleIndexChange($event)"></app-exam-results>
         }
     </div>
+    }@else{
+    <div class="flex flex-col p-10 items-center justify-evenly">
+        <span class="block text-center w-full text-blue-600 text-[30px] mb-5">Sorry , Time Limit has been reached
+            without
+            finishing the exam</span>
+        <div class="p-4">
+            <app-main-button [btnClass]="'1'" [content]="'Explore Diplomas'"></app-main-button>
+        </div>
+    </div>
+    }
 </div>

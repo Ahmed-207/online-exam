@@ -1,16 +1,25 @@
 <div class="flex items-center justify-center">
     <div class="grow pe-4">
         <div class="flex items-center justify-between w-full mb-2">
-            <h2 class="text-gray-800 font-medium">Frontend Development - CSS Quiz</h2>
-            <span class="text-gray-500 font-light">Question <span class="text-blue-600 font-medium">1</span> of
-                25</span>
+            <h2 class="text-gray-800 font-medium">{{diplomaTitle()}} - {{examTitle()}}</h2>
+            <span class="text-gray-500 font-light">Question <span
+                    class="text-blue-600 font-medium">{{currentQuestionIndex()}}</span> of
+                {{totalQuestions()}}</span>
         </div>
-        <div class="card">
-            <p-progressbar [value]="50" [showValue]="false" />
+        <div class="card shrink-0">
+            <p-progressbar [value]="progressValue()" [showValue]="false" />
         </div>
 
     </div>
-    <div class="timer-chart-container card flex justify-center w-[10%] ps-4 border-s border-gray-200">
+    @if(!examFinishFlag()){
+    <div class="timer-chart-container relative card flex justify-center w-[10%] ps-4 border-s border-gray-200">
         <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" />
+        <div class="absolute inset-0 flex flex-col items-center justify-center ps-4">
+            <span class="text-blue-600 font-bold text-sm">
+                {{ remainingTimeDisplay() }}
+            </span>
+            <span class="text-[10px] text-gray-400 uppercase">Left</span>
+        </div>
     </div>
+    }
 </div>

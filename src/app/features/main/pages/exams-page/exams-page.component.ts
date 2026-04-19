@@ -11,7 +11,7 @@ import { Exam } from './interfaces/diploma-exams-res.interface';
   templateUrl: './exams-page.component.html',
   styleUrl: './exams-page.component.css',
 })
-export class ExamsPageComponent implements OnInit{
+export class ExamsPageComponent implements OnInit {
 
   private readonly examsService = inject(DiplomaExamsService);
   private readonly plat_id = inject(PLATFORM_ID);
@@ -21,25 +21,26 @@ export class ExamsPageComponent implements OnInit{
 
   ngOnInit(): void {
 
-    if(isPlatformBrowser(this.plat_id)){
+    if (isPlatformBrowser(this.plat_id)) {
       this.activeRoute.paramMap.subscribe({
-        next: (params)=>{
+        next: (params) => {
           this.diplomaIdForExams.set(params.get('id')!)
         }
       })
       this.getExams(this.diplomaIdForExams());
     }
-    
+
   }
 
-  getExams(id:string):void{
-    if(localStorage.getItem('token')){
+  getExams(id: string): void {
+    if (localStorage.getItem('token')) {
       this.examsService.getAllDiplomaExams(id).subscribe({
-        next: (res)=>{
+        next: (res) => {
           this.diplomaExams.set(res.payload.data);
+          this.examsService.currentDiplomaTitle.set(res.payload.data[0].diploma.title);
           console.log(res);
         },
-        error: (err)=>{
+        error: (err) => {
           console.log(err);
         }
       })

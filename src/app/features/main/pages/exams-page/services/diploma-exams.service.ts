@@ -18,6 +18,9 @@ export class DiplomaExamsService {
   examFinishFlag: WritableSignal<boolean> = signal<boolean>(false);
   submissionId: WritableSignal<string> = signal<string>('');
   currentExamId: WritableSignal<string> = signal<string>('');
+  currentExamTitle: WritableSignal<string> = signal<string>('');
+  currentDiplomaTitle: WritableSignal<string> = signal<string>('');
+  currentExamTime:WritableSignal<number> = signal<number>(0);
 
   getAllDiplomaExams(id: string): Observable<DiplomaExamsRes> {
     return this.httpClient.get<DiplomaExamsRes>(`https://exam-app.elevate-bootcamp.cloud/api/exams?diplomaId=${id}&page=1&limit=20`, {

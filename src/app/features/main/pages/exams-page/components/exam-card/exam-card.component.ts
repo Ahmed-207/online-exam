@@ -4,6 +4,7 @@ import { MainButtonComponent } from "../../../../../../shared/components/main-bu
 import { Exam } from '../../interfaces/diploma-exams-res.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageTitleService } from '../../../../../../core/services/page-title.service';
+import { DiplomaExamsService } from '../../services/diploma-exams.service';
 
 @Component({
   selector: 'app-exam-card',
@@ -19,11 +20,14 @@ export class ExamCardComponent {
   private readonly router = inject(Router);
   private readonly activeRoute = inject(ActivatedRoute);
   private readonly pageTitle = inject(PageTitleService);
+  private readonly examService = inject(DiplomaExamsService);
   examId = computed<string>(()=> { return this.examData().id});
 
   navigateToExamQuestions():void{
 
     this.router.navigate([this.examId()], {relativeTo: this.activeRoute});
+    this.examService.currentExamTitle.set(this.examData().title);
+    this.examService.currentExamTime.set(this.examData().duration);
     this.pageTitle.generalPageTitle.set(this.examData().title);
 
 

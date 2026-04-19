@@ -18,6 +18,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   private readonly examService = inject(DiplomaExamsService);
   examQuestionsData = computed<Question[]>(() => { return this.examService.examQuestions() });
   currentIndex = signal(0);
+  currentIndexForParent = output<number>();
   currentQuestion = computed<Question | undefined>(() => {
     const questions = this.examQuestionsData();
     return questions.length > 0 ? questions[this.currentIndex()] : undefined;
@@ -73,6 +74,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.internalRestartFlag.set(this.restartFlagForExam());
     if (this.internalRestartFlag()) {
       this.currentIndex.set(0);
+      this.currentIndexForParent.emit(this.currentIndex() + 1);
       this.allSelectedAnswers.set([]);
       this.internalRestartFlag.set(false);
       this.restartFlagForParentEmit.emit(false);
@@ -106,6 +108,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
     if (this.currentIndex() < this.examQuestionsData().length - 1) {
       this.currentIndex.update(i => i + 1);
+      this.currentIndexForParent.emit(this.currentIndex() + 1);
       this.questionForm.reset();
     } else {
       this.submitAnswersForReq();
@@ -130,6 +133,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   getPreviousQuestion(): void {
     if (this.currentIndex() > 0) {
       this.currentIndex.update(i => i - 1);
+      this.currentIndexForParent.emit(this.currentIndex() + 1);
     }
   }
 
