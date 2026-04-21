@@ -1,1 +1,16 @@
-<p>error-page works!</p>
+<section class="w-full min-h-screen flex justify-center items-center bg-white">
+    <div class=" bg-gray-50 flex flex-col items-center gap-3 p-10 shadow-2xl w-[50%]">
+        <div
+            class="flex items-center justify-center">
+            <lucide-angular [img]="circleX" [color]="'blue'" [size]="50" class="my-icon me-2"></lucide-angular>
+        </div>
+        <h1 class="text-[16px] md:text-[30px] font-medium text-center">Page not found !</h1>
+        <p class="md:text-[12px] text-[10px] text-gray-600 font-light text-center">it seems you are searching for a wrong path or
+            corrupted link, you can check our available exams and diplomas through the link below</p>
+
+        <div class="btn-container w-full text-[10px] md:text-15px">
+            <app-main-button [btnClass]="'1'" [content]="'Explore diplomas'"
+                (buttonClick)="exploreDiplomas()"></app-main-button>
+        </div>
+    </div>
+</section>
