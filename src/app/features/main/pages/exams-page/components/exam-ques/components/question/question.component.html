@@ -1,12 +1,18 @@
 @if(currentQuestion()){
 <div class="question-container">
-    <span class="block text-[24px] font-medium text-blue-600 mb-4">{{currentQuestion()?.text}}</span>
-    <div class="card w-full">
-        <div class="flex flex-col gap-2 mb-4">
+    <span
+        class="block text-[12px] md:text-[24px] font-light md:font-medium text-blue-600 mb-2 md:mb-4">{{currentQuestion()?.text}}</span>
+    <div class="card w-full max-w-full">
+        <div class="flex flex-col gap-1 md:gap-2 mb-2 md:mb-4">
             @for( answer of currentQuestion()?.answers; track $index ){
-            <div class="field-checkbox bg-gray-50 hover:bg-gray-100 p-2">
-                <p-radiobutton [inputId]="answer.id" name="answer" [value]="answer.id" [formControl]="questionForm" />
-                <label [for]="answer" class="ml-2 text-gray-800 text-[14px] font-medium">{{ answer.text }}</label>
+            <div class="field-checkbox bg-gray-50 hover:bg-gray-100 p-1 md:p-2 flex items-start">
+                <p-radiobutton [inputId]="answer.id" name="answer" [value]="answer.id" [formControl]="questionForm"
+                    class="shrink-0" />
+
+                <label [for]="answer.id"
+                    class="ml-1 md:ml-2 text-gray-800 text-[12px] md:text-[14px] font-medium cursor-pointer wrap-break-words overflow-hidden">
+                    {{ answer.text }}
+                </label>
             </div>
             }
         </div>

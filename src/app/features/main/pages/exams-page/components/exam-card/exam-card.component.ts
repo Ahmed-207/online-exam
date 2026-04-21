@@ -5,6 +5,9 @@ import { Exam } from '../../interfaces/diploma-exams-res.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageTitleService } from '../../../../../../core/services/page-title.service';
 import { DiplomaExamsService } from '../../services/diploma-exams.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-exam-card',
@@ -22,6 +25,15 @@ export class ExamCardComponent {
   private readonly pageTitle = inject(PageTitleService);
   private readonly examService = inject(DiplomaExamsService);
   examId = computed<string>(() => { return this.examData().id });
+  private readonly breakpointObserver = inject(BreakpointObserver);
+
+
+  isSmallScreen = toSignal(
+    this.breakpointObserver.observe('(max-width: 800px)').pipe(
+      map(result => result.matches)
+    ),
+    { initialValue: false }
+  );
 
 
 

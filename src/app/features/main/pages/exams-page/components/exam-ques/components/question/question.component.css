@@ -41,3 +41,29 @@
 * {
     font-family: "Geist Mono", monospace;
 }
+
+@media (max-width: 800px) {
+
+    :host ::ng-deep .p-radiobutton-box {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 1px solid #cbd5e1;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        margin-inline: 0;
+    }
+
+    :host ::ng-deep .p-radiobutton.p-radiobutton-checked .p-radiobutton-box::after {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #2563eb;
+        display: block;
+    }
+
+}

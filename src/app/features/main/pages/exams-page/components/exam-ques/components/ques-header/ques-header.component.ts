@@ -3,6 +3,9 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ChartModule } from 'primeng/chart';
 import { isPlatformBrowser } from '@angular/common';
 import { DiplomaExamsService } from '../../../../services/diploma-exams.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ques-header',
@@ -37,6 +40,14 @@ export class QuesHeaderComponent {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   });
   timeLimitReached = output<boolean>();
+  private readonly breakpointObserver = inject(BreakpointObserver);
+
+  isSmallScreen = toSignal(
+    this.breakpointObserver.observe('(max-width: 800px)').pipe(
+      map(result => result.matches)
+    ),
+    { initialValue: false }
+  );
 
 
   constructor() {

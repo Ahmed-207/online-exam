@@ -1,3 +1,21 @@
+@if(isSmallScreen()){
+<div class="exam-title">
+    <h2 class="text-gray-800 font-light text-[12px] mb-2 text-start">{{examTitle()}}</h2>
+    <div class="flex items-center justify-between w-full mb-2">
+        <span class="text-gray-500 font-light text-[10px] text-end block">Question <span
+                class="text-blue-600 font-medium">{{currentQuestionIndex()}}</span> of
+            {{totalQuestions()}}</span>
+        @if(!examFinishFlag()){
+        <span class="text-blue-600 font-light text-[10px]">
+            {{ remainingTimeDisplay() }}
+        </span>
+        }
+    </div>
+    <div class="card w-full mb-2">
+        <p-progressbar [value]="progressValue()" [showValue]="false" />
+    </div>
+</div>
+}@else {
 <div class="flex items-center justify-center">
     <div class="grow pe-4">
         <div class="flex items-center justify-between w-full mb-2">
@@ -23,3 +41,4 @@
     </div>
     }
 </div>
+}

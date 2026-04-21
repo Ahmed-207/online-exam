@@ -1,12 +1,13 @@
 <div
     class="group exam-card-container grid md:grid-cols-12 p-4 bg-blue-50 gap-3 hover:outline hover:outline-dashed hover:outline-blue-200 relative">
-    <div class="exam-logo-container md:col-span-1 p-2 border border-blue-300 bg-blue-100">
+    <div class="exam-logo-container hidden md:block md:col-span-1 p-2 border border-blue-300 bg-blue-100">
         <img [src]="examData().image" class="block size-full" alt="">
     </div>
-    <div class="exam-content md:col-span-11 flex flex-col justify-between">
-        <div class="flex justify-between">
-            <h2 class="text-blue-600 text-[20px] font-medium">{{examData().title}}</h2>
-            <div class="tq-container text-[14px] font-light text-gray-800 flex items-center justify-center">
+    <div class="exam-content col-span-12 md:col-span-11 flex flex-col justify-between">
+        <div class="md:flex md:justify-between">
+            <h2 class="text-blue-600 text-[14px] md:text-[20px] font-medium mb-2">{{examData().title}}</h2>
+            <div
+                class="tq-container text-[12px] md:text-[14px] font-light text-gray-800 flex items-center justify-center mb-2">
                 <span class="px-2 flex items-center gap-1 border-r border-gray-300"><lucide-angular
                         [img]="circleQuestionMark"
                         class="size-3.5 text-gray-800"></lucide-angular>{{examData().questionsCount}}
@@ -17,10 +18,17 @@
         </div>
         <p class="text-gray-500 text-[14px] font-light">{{examData().description}}</p>
     </div>
+    @if(isSmallScreen()){
+    <div class="btn-container py-2">
+        <app-main-button [btnClass]="'1'" [content]="'start'" [isRightIcon]="true" [rightIcon]="'pi pi-arrow-right'"
+            (buttonClick)="navigateToExamQuestions()"></app-main-button>
+    </div>
+    }@else {
     <div class="hidden group-hover:block btn-layer absolute inset-0">
         <div class="btn-container py-10 px-2 absolute -bottom-8 right-0">
-            <app-main-button [btnClass]="'1'" [content]="'start'" [isRightIcon]="true"
-                [rightIcon]="'pi pi-arrow-right'" (buttonClick)="navigateToExamQuestions()"></app-main-button>
+            <app-main-button [btnClass]="'1'" [content]="'start'" [isRightIcon]="true" [rightIcon]="'pi pi-arrow-right'"
+                (buttonClick)="navigateToExamQuestions()"></app-main-button>
         </div>
     </div>
+    }
 </div>

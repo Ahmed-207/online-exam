@@ -1,3 +1,16 @@
-img.logo{
+img.logo {
     filter: brightness(0.2);
+}
+
+
+.dock-window {
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+
+}
+
+
+:host ::ng-deep .p-dock {
+    pointer-events: auto;
 }

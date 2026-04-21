@@ -1,3 +1,20 @@
+@if(isSmallScreen()){
+<main class="flex flex-col items-center gap-2">
+    <nav class="fixed bottom-2 left-0 w-full z-50">
+        <app-main-sidebar></app-main-sidebar>
+    </nav>
+    <section>
+        <div class="p-6 main-route bg-gray-50 grow">
+            <div class="mb-6">
+                <app-main-header></app-main-header>
+            </div>
+            <div class="main-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </section>
+</main>
+}@else {
 <main class="grid grid-cols-12 h-screen">
     <nav class="md:col-span-3 bg-blue-50">
         <app-main-sidebar></app-main-sidebar>
@@ -18,3 +35,4 @@
         </div>
     </section>
 </main>
+}

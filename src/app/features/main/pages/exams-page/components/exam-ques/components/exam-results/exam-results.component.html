@@ -1,14 +1,16 @@
 <div>
-    <h2 class="text-blue-600 text-[24px] font-medium mb-4">Results :</h2>
-    <div class="results-container grid md:grid-cols-12 gap-3 mb-4">
-        <div class="chart-container col-span-3 p-9 bg-blue-50 border border-blue-200 flex items-center justify-center">
+    <h2 class="text-blue-600 text-[16px] md:text-[24px] font-light md:font-medium mb-2 md:mb-4">Results :</h2>
+    <div class="results-container grid md:grid-cols-12 md:gap-3 mb-2 md:mb-4">
+        <div
+            class="chart-container col-span-12 md:col-span-3 p-5 md:p-9 bg-blue-50 border border-blue-200 flex items-center justify-center mx-auto md:mx-0">
             <p-chart type="doughnut" [data]="data" [options]="options" class="w-full" [responsive]="true" />
         </div>
         <div
-            class="answers-container col-span-9 border border-dashed border-blue-200 p-4 max-h-[50vh] overflow-y-scroll">
+            class="answers-container col-span-12 md:col-span-9 border border-dashed border-blue-200 p-2 md:p-4 max-h-[50vh] overflow-y-scroll">
             @for(ques of examResults(); track $index){
             <div class="question-card">
-                <span class="block text-[20px] font-medium text-blue-600 mb-1">{{ques.questionText}}</span>
+                <span
+                    class="block text-[12px] md:text-[24px] font-light md:font-medium text-blue-600 mb-2 md:mb-4">{{ques.questionText}}</span>
                 <div class="card w-full">
                     <div class="flex flex-col gap-2 mb-4">
 
@@ -17,10 +19,10 @@
                             [class]="ques.isCorrect ? 'bg-emerald-50' : 'bg-red-50'">
 
                             <p-radiobutton [inputId]="ques.selectedAnswer.id + $index" [disabled]="true"
-                                [ngModel]="ques.selectedAnswer.id" [value]="ques.selectedAnswer.id" />
+                                [ngModel]="ques.selectedAnswer.id" [value]="ques.selectedAnswer.id" class="shrink-0" />
 
                             <label [for]="ques.selectedAnswer.id + $index"
-                                class="ml-2 text-gray-800 text-[14px] font-medium">
+                                class="ml-2 text-gray-800 text-[12px] md:text-[14px] font-medium cursor-pointer wrap-break-words overflow-hidden">
                                 {{ ques.selectedAnswer.text }}
                             </label>
                         </div>
@@ -28,10 +30,10 @@
                         @if(!ques.isCorrect){
                         <div class="field-checkbox bg-emerald-50 p-2 correct-reveal">
                             <p-radiobutton [disabled]="true" [inputId]="ques.correctAnswer.id + 'corr' + $index"
-                                [ngModel]="ques.correctAnswer.id" [value]="ques.correctAnswer.id" />
+                                [ngModel]="ques.correctAnswer.id" [value]="ques.correctAnswer.id" class="shrink-0" />
 
                             <label [for]="ques.correctAnswer.id + 'corr' + $index"
-                                class="ml-2 text-gray-800 text-[14px] font-medium">
+                                class="ml-2 text-gray-800 text-[12px] md:text-[14px] font-medium cursor-pointer wrap-break-words overflow-hidden">
                                 {{ ques.correctAnswer.text }} (Correct Answer)
                             </label>
                         </div>

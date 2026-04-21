@@ -1,3 +1,15 @@
+@if(isSmallScreen()){
+<div class="dock-window">
+    <p-dock [model]="items" [position]="'bottom'">
+        <ng-template #item let-item>
+            <a [routerLink]="item.routerLink"
+                class="flex items-center justify-center w-full p-3 bg-white text-blue-600 rounded border border-blue-500">
+                <li class="icon-container text-xl" [class]="item.iconClass"></li>
+            </a>
+        </ng-template>
+    </p-dock>
+</div>
+}@else {
 <section class="p-10 h-full flex flex-col justify-stretch">
     <div class="logo-container grid grid-cols-3 mb-3">
         <div class="image-container col-span-2 mb-2">
@@ -25,3 +37,4 @@
         </div>
     </div>
 </section>
+}

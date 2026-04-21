@@ -6,6 +6,9 @@ import { MainHeaderComponent } from "../../../features/main/components/main-head
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { PageTitleService } from '../../services/page-title.service';
 import { filter } from 'rxjs';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
@@ -18,10 +21,13 @@ export class MainLayoutComponent {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   public pageTitleService = inject(PageTitleService);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+
 
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
 
   ngOnInit() {
+
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -32,6 +38,13 @@ export class MainLayoutComponent {
     });
   }
 
+  isSmallScreen = toSignal(
+    this.breakpointObserver.observe('(max-width: 800px)').pipe(
+      map(result => result.matches)
+    ),
+    { initialValue: false }
+  );
+
   private getRouteBreadcrumb(route: ActivatedRoute): string | null {
     let child = route.firstChild;
     while (child?.firstChild) {
@@ -39,4 +52,6 @@ export class MainLayoutComponent {
     }
     return child?.snapshot.data['breadcrumb'] || null;
   }
+
+
 }
