@@ -8,7 +8,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 import { DockModule } from 'primeng/dock';
-import  { TooltipModule } from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-main-sidebar',
   imports: [LucideAngularModule, UserCardComponent, RouterLink, RouterLinkActive, DockModule, TooltipModule],
@@ -44,7 +44,7 @@ export class MainSidebarComponent implements OnInit {
       {
         label: 'Account setting',
         iconClass: 'pi pi-cog',
-        routerLink: 'user-account'
+        routerLink: 'account',
       }
     ];
   }
@@ -56,5 +56,6 @@ export class MainSidebarComponent implements OnInit {
     ),
     { initialValue: false }
   );
+
 }
 

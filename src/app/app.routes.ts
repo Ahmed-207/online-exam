@@ -18,7 +18,8 @@ export const routes: Routes = [
             { path: '', redirectTo: 'diplomas', pathMatch: 'full' },
             { path: 'diplomas', loadComponent: () => import('./features/main/pages/diplomas-page/diplomas-page.component').then((c) => c.DiplomasPageComponent), title: 'Diplomas' },
             { path: 'diplomas/:id', loadComponent: () => import('./features/main/pages/exams-page/exams-page.component').then((c) => c.ExamsPageComponent), title: 'Exams' },
-            { path: 'diplomas/:id/:examId', loadComponent: () => import('./features/main/pages/exams-page/components/exam-ques/exam-ques.component').then((c) => c.ExamQuesComponent), title: 'Questions' }
+            { path: 'diplomas/:id/:examId', loadComponent: () => import('./features/main/pages/exams-page/components/exam-ques/exam-ques.component').then((c) => c.ExamQuesComponent), title: 'Questions' },
+            { path: 'account', loadComponent: () => import('./features/main/pages/account-page/account-page.component').then((c) => c.AccountPageComponent), title: 'Account Setting' }
         ]
     }
     ,

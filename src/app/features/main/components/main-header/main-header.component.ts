@@ -21,14 +21,21 @@ export class MainHeaderComponent implements OnInit {
   hasHistory: WritableSignal<boolean> = signal<boolean>(false);
   readonly pageTitle = inject(PageTitleService);
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     if (isPlatformBrowser(this.plat_id)) {
       this.updateBackwardFlag(this.router.url);
+      this.pageTitle.updateTitleByUrl(this.router.url);
+
       this.router.events.pipe(
         filter(event => event instanceof NavigationEnd)
       ).subscribe((event: NavigationEnd) => {
-        this.updateBackwardFlag(event.urlAfterRedirects);
+        const currentUrl = event.urlAfterRedirects;
+
+        this.updateBackwardFlag(currentUrl);
+
+        this.pageTitle.updateTitleByUrl(currentUrl);
+
         this.hasHistory.set(true);
       });
     }
@@ -42,8 +49,13 @@ export class MainHeaderComponent implements OnInit {
   goBack(): void {
     if (this.hasHistory()) {
 
-      this.location.back();
-      this.pageTitle.rollbackTitle();
+      if (this.router.url === '/home/account') {
+        this.router.navigate(['/home/diplomas'])
+      } else {
+
+        this.location.back();
+        this.pageTitle.rollbackTitle();
+      }
 
     } else {
       this.router.navigate(['/home/diplomas']);
