@@ -1,5 +1,5 @@
 import { Component, effect, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideAngularModule, CircleUserRound, Lock, LogOut, PencilLine } from 'lucide-angular';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
@@ -30,6 +30,7 @@ export class AccountPageComponent implements OnInit {
   profileChangeData: WritableSignal<EditProfileReq> = signal({} as EditProfileReq);
   subscriptionRef!: Subscription;
   submitButtonFlag: WritableSignal<boolean> = signal<boolean>(true);
+  private readonly router = inject(Router);
 
   constructor(){
     effect(()=>{
@@ -79,6 +80,26 @@ export class AccountPageComponent implements OnInit {
   showModal(): void {
     this.modalFlag.emailModalFlag.set(true)
   }
+
+  signOut():void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+  // this will be in the delete account modal .. take modallayout from the change email flow and figma
+
+  // deleteAccountForEver():void{
+  //   this.userProfileService.deleteAccount().subscribe({
+  //     next: (res)=>{
+  //       console.log(res.message);
+  //       localStorage.removeItem('token');
+  //       this.router.navigate(['/login']);
+  //     },
+  //     error: (err)=>{
+  //       console.log(err);
+  //     }
+  //   })
+  // }
 
 
 

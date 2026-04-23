@@ -12,7 +12,7 @@
                         class="ms-2">Change Password</span></a></li>
         </ul>
         <div class="log-out-button cursor-pointer">
-            <a class="p-4 flex text-red-500  font-light bg-red-50"><lucide-angular [img]="logOut"></lucide-angular><span
+            <a class="p-4 flex text-red-500  font-light bg-red-50" (click)="signOut()"><lucide-angular [img]="logOut"></lucide-angular><span
                     class="ms-2">Logout</span></a>
         </div>
     </div>

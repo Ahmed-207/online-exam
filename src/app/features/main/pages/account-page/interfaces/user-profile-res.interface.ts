@@ -28,5 +28,7 @@ export interface EmailChangeRes {
     code: string
 }
 
-
+export interface DeleteAccountRes {
+    message: string
+}
 
