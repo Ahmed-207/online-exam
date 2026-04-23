@@ -1,0 +1,30 @@
+<div class="flex flex-col items-center justify-center gap-3">
+    <h2 class="text-[30px] font-extrabold">Change Email</h2>
+    <h3 class="text-[24px] font-bold text-blue-600">Enter your new email</h3>
+    <form class="flex flex-col items-center w-full gap-3" [formGroup]="emailChangeForm" (ngSubmit)="submitEmailChange()">
+        <div class="flex flex-col gap-2 w-full">
+            <label for="email">E-mail</label>
+            <input class="w-full" pInputText formControlName="newEmail" id="email" aria-describedby="email"
+                type="email" />
+            @let emailInput = emailChangeForm.get('newEmail');
+            @if(emailInput?.invalid && emailInput?.touched){
+            @if(emailInput?.getError('required')){
+            <span class="my-1 w-full inline-block text-red-500 text-[16px]">please enter your email</span>
+            }@else if(emailInput?.getError('email')){
+            <span class="my-1 w-full inline-block text-red-500 text-[16px]">please enter a valid email format
+                ex:john@doe.com</span>
+            }
+            }
+            @if(errorFlag()){
+            <div class="col-span-12">
+                <app-alert-message [alertContent]="errorMsg()"></app-alert-message>
+            </div>
+            }
+            <div class="col-span-12 pt-6">
+                <app-main-button [btnClass]="'1'" [content]="'next'" [isRightIcon]=" buttonFlag() ? true : undefined "
+                    [disabledFlag]="buttonFlag()"
+                    [rightIcon]="buttonFlag() ? 'pi pi-spin pi-spinner': 'pi pi-arrow-right'"></app-main-button>
+            </div>
+        </div>
+    </form>
+</div>

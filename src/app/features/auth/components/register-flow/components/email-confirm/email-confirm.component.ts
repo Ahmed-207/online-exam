@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertMessageComponent } from "../../../../../../shared/components/alert-message/alert-message.component";
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-confirm',
@@ -18,7 +17,6 @@ export class EmailConfirmComponent implements OnInit {
 
   private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
-  private readonly _router = inject(Router);
   emailConfirm!: FormGroup;
   emailSubscription: WritableSignal<Subscription> = signal(new Subscription);
   buttonFlag: WritableSignal<boolean> = signal(false);

@@ -1,0 +1,13 @@
+:host ::ng-deep .p-inputtext,
+.p-inputnumber {
+    border-radius: 0;
+}
+
+
+:host ::ng-deep .p-inputtext:focus {
+    --p-inputtext-focus-border-color: blue;
+}
+
+:host ::ng-deep .p-inputnumber:focus {
+    --p-inputtext-focus-border-color: blue;
+}

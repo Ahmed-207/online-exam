@@ -3,6 +3,12 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
 
 h1,
 h2,
@@ -38,5 +44,9 @@ label {
 
     .btn-outline {
         @apply bg-blue-50 py-4 px-8 border border-blue-600 text-black hover:bg-blue-200 transition-colors duration-200 disabled:bg-gray-200 disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed
+    }
+
+    .btn-destructive-outline {
+        @apply bg-red-50 py-4 px-8 text-red-600 hover:bg-red-100 transition-colors duration-200 disabled:bg-gray-200 disabled:text-gray-400 cursor-pointer disabled:cursor-not-allowed
     }
 }

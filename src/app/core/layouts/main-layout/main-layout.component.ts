@@ -9,6 +9,7 @@ import { filter } from 'rxjs';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
+import { UserProfileService } from '../../../features/main/pages/account-page/services/user-profile.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -22,12 +23,15 @@ export class MainLayoutComponent {
   private activatedRoute = inject(ActivatedRoute);
   public pageTitleService = inject(PageTitleService);
   private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly userProfileService = inject(UserProfileService);
 
 
   home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
 
   ngOnInit() {
 
+
+    this.getProfileData();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -53,6 +57,17 @@ export class MainLayoutComponent {
     return child?.snapshot.data['breadcrumb'] || null;
   }
 
+
+  getProfileData(): void {
+    this.userProfileService.getUserProfileData().subscribe({
+      next: (res) => {
+        this.userProfileService.userProfileData.set(res.payload.user);
+      },
+      error: (err)=> {
+        console.log(err);
+      }
+    })
+  }
 
 
 }

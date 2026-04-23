@@ -1,6 +1,7 @@
-import { Component, ElementRef, HostListener, inject, signal, WritableSignal } from '@angular/core';
+import { Component, computed, ElementRef, HostListener, inject, signal, WritableSignal } from '@angular/core';
 import { LucideAngularModule, EllipsisVertical, UserRound, Bolt, LogOut } from 'lucide-angular';
 import { RouterLink } from "@angular/router";
+import { UserProfileService } from '../../../../pages/account-page/services/user-profile.service';
 
 @Component({
   selector: 'app-user-card',
@@ -16,6 +17,9 @@ export class UserCardComponent {
   readonly userRound = UserRound;
   readonly bolt = Bolt;
   readonly logOut = LogOut;
+  private readonly userProfileService = inject(UserProfileService);
+  userFullName = computed<string>(() => { return this.userProfileService.userProfileData().firstName + ' ' + this.userProfileService.userProfileData().lastName });
+  userEmail = computed<string>(() => { return this.userProfileService.userProfileData().email });
 
 
 

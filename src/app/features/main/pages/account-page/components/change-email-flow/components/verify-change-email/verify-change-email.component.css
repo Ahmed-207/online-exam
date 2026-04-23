@@ -1,0 +1,9 @@
+:host ::ng-deep .p-inputotp-input{
+
+    border-radius: 0;
+
+}
+
+:host ::ng-deep .p-inputotp-input:focus{
+    --p-inputtext-focus-border-color:blue !important;
+}

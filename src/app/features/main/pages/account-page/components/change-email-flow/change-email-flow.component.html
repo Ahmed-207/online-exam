@@ -1,0 +1,34 @@
+<div class="flex flex-col items-center justify-stretch p-10 bg-white w-full max-w-125 min-h-112.5">
+    <button (click)="closeModal()" class="absolute top-3 right-6 text-gray-400 hover:text-gray-600">
+        <i class="pi pi-times"></i>
+    </button>
+    <div class="stepper-wrapper">
+        <div class="stepper">
+            @for (step of steps; track step.state; let i = $index; let last = $last) {
+            <div class="step-item">
+                <div class="diamond-wrap">
+                    <div class="diamond" [class]="getStepState(i)">
+                        @if (getStepState(i) === 'done') {
+                        <span class="check">✓</span>
+                        }
+                    </div>
+                </div>
+            </div>
+            @if (!last) {
+            <div class="connector" [class]="getStepState(i) === 'done' ? 'solid' : 'dashed'"></div>
+            }
+            }
+        </div>
+    </div>
+    <div>
+        @switch(currentState()){
+        @case('change email'){
+        <app-change-email (nextState)="handleCurrentState($event)"
+            (emailValue)="recieveMailValue($event)"></app-change-email>
+        }
+        @case('verify change'){
+        <app-verify-change-email [storedEmail]="verifiedEmail()"></app-verify-change-email>
+        }
+        }
+    </div>
+</div>

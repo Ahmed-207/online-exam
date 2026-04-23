@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 import { EmailConfirmComponent } from "./components/email-confirm/email-confirm.component";
 import { VerifyOtpComponent } from "./components/verify-otp/verify-otp.component";
 import { RegisterComponent } from "./components/register/register.component";

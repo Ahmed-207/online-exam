@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, OnInit, output, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, OnDestroy, OnInit, output, signal, WritableSignal } from '@angular/core';
 import { InputOtpModule } from 'primeng/inputotp';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { PrimeIcons } from 'primeng/api';
@@ -16,7 +16,7 @@ import { AlertMessageComponent } from "../../../../../../shared/components/alert
   templateUrl: './verify-otp.component.html',
   styleUrl: './verify-otp.component.css',
 })
-export class VerifyOtpComponent implements OnInit {
+export class VerifyOtpComponent implements OnInit, OnDestroy {
 
   private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
@@ -25,14 +25,14 @@ export class VerifyOtpComponent implements OnInit {
   counter: WritableSignal<number> = signal<number>(60);
   intervalRef: any;
   storedEmail: InputSignal<string> = input<string>('');
-  verifyForm!:FormGroup;
+  verifyForm!: FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
   subscriptionRef: WritableSignal<Subscription> = signal(new Subscription);
   currentStateFlag = output<string>();
 
-  otpEmit():void{
+  otpEmit(): void {
     this.currentStateFlag.emit('register');
   }
 
@@ -65,7 +65,8 @@ export class VerifyOtpComponent implements OnInit {
         this.counterSet();
       },
       error: (err) => {
-        console.log(err);
+        this.errorFlag.set(true);
+        this.errorMsg.set(err.message);
       }
     })
   }
@@ -88,7 +89,7 @@ export class VerifyOtpComponent implements OnInit {
       this.errorFlag.set(false);
       this.subscriptionRef().unsubscribe;
       this.subscriptionRef.set(this._authService.verify({ code: this.verifyForm.get('code')?.value, email: this.storedEmail() }).subscribe({
-        next: (res:any) => {
+        next: (res: any) => {
           this.buttonFlag.set(false);
           console.log(res);
           this.otpEmit();
@@ -104,5 +105,8 @@ export class VerifyOtpComponent implements OnInit {
   }
 
 
+  ngOnDestroy(): void {
+    clearInterval(this.intervalRef);
+  }
 
 }

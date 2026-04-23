@@ -2,7 +2,6 @@ import { Component, inject, input, InputSignal, output, signal, WritableSignal }
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -14,7 +13,6 @@ import { Subscription } from 'rxjs';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  private readonly _router = inject(Router);
   private readonly _fb = inject(FormBuilder);
   storedEmail: InputSignal<string> = input<string>(''); 
   registerForm!: FormGroup;

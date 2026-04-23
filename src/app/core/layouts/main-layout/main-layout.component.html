@@ -1,18 +1,19 @@
 @if(isSmallScreen()){
-<main class="flex flex-col items-center gap-2">
-    <nav class="fixed bottom-2 left-0 w-full z-50">
-        <app-main-sidebar></app-main-sidebar>
-    </nav>
-    <section>
-        <div class="p-6 main-route bg-gray-50 grow">
-            <div class="mb-6">
+<main class="flex flex-col min-h-screen bg-gray-50">
+    <section class="grow flex flex-col pb-20">
+        <div class="p-6 main-route grow flex flex-col">
+            <div class="mb-6 shrink-0">
                 <app-main-header></app-main-header>
             </div>
-            <div class="main-content">
+            <div class="main-content grow">
                 <router-outlet></router-outlet>
             </div>
         </div>
     </section>
+
+    <nav class="fixed bottom-2 left-0 w-full z-50">
+        <app-main-sidebar></app-main-sidebar>
+    </nav>
 </main>
 }@else {
 <main class="grid grid-cols-12 h-screen">
@@ -25,11 +26,11 @@
                 <ng-template #separator> / </ng-template>
             </p-breadcrumb>
         </div>
-        <div class="p-6 main-route bg-gray-50 grow">
-            <div class="mb-6">
+        <div class="p-6 main-route bg-gray-50 grow flex flex-col overflow-y-auto">
+            <div class="mb-6 shrink-0">
                 <app-main-header></app-main-header>
             </div>
-            <div class="main-content">
+            <div class="main-content grow">
                 <router-outlet></router-outlet>
             </div>
         </div>
