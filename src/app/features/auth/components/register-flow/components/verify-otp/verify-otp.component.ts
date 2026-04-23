@@ -3,7 +3,6 @@ import { InputOtpModule } from 'primeng/inputotp';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { PrimeIcons } from 'primeng/api';
 import { AuthService } from 'auth';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -19,7 +18,6 @@ import { AlertMessageComponent } from "../../../../../../shared/components/alert
 export class VerifyOtpComponent implements OnInit, OnDestroy {
 
   private readonly _authService = inject(AuthService);
-  private readonly _router = inject(Router);
   private readonly _fb = inject(FormBuilder);
   counterFlag: WritableSignal<boolean> = signal<boolean>(true);
   counter: WritableSignal<number> = signal<number>(60);
