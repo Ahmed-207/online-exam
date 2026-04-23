@@ -6,5 +6,6 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 export class ModalFlagService {
 
   emailModalFlag: WritableSignal<boolean> = signal<boolean>(false);
+  deleteAccountFlag: WritableSignal<boolean> = signal<boolean>(false);
   
 }

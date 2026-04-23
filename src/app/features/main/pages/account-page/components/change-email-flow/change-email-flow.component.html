@@ -27,7 +27,7 @@
             (emailValue)="recieveMailValue($event)"></app-change-email>
         }
         @case('verify change'){
-        <app-verify-change-email [storedEmail]="verifiedEmail()"></app-verify-change-email>
+        <app-verify-change-email [storedEmail]="verifiedEmail()" (stateForParent)="handleCurrentState($event)"></app-verify-change-email>
         }
         }
     </div>

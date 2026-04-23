@@ -72,7 +72,7 @@ export class VerifyOtpComponent implements OnInit, OnDestroy {
   }
 
   resetEmail(): void {
-    this._router.navigate(['/email-confirm']);
+    this.currentStateFlag.emit('email confirm');
   }
 
   createVerifyForm(): void {

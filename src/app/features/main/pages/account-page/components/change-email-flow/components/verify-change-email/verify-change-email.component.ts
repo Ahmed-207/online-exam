@@ -23,6 +23,7 @@ export class VerifyChangeEmailComponent implements OnInit, OnDestroy {
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
+  stateForParent = output<string>();
   private readonly fb = inject(FormBuilder);
   private readonly userProfileService = inject(UserProfileService);
   private readonly modalFlag = inject(ModalFlagService);
@@ -41,6 +42,7 @@ export class VerifyChangeEmailComponent implements OnInit, OnDestroy {
   }
 
   resetEmail(): void {
+    this.stateForParent.emit('change email');
   }
 
   resendCode(): void {

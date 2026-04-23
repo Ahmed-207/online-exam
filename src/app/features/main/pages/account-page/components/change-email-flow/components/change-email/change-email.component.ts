@@ -51,7 +51,7 @@ export class ChangeEmailComponent implements OnInit{
         error: (err: HttpErrorResponse)=>{
           this.errorFlag.set(true);
           this.buttonFlag.set(false);
-          this.errorMsg.set(err.message);
+          this.errorMsg.set(err.error.message);
         }
       })
     }

@@ -10,10 +10,11 @@ import { UserProfileService } from './services/user-profile.service';
 import { EditProfileReq } from './interfaces/edit-profile-req.interface';
 import { ChangeEmailFlowComponent } from "./components/change-email-flow/change-email-flow.component";
 import { ModalFlagService } from './services/modal-flag.service';
+import { DeleteAccountModalComponent } from "./components/delete-account-modal/delete-account-modal.component";
 
 @Component({
   selector: 'app-account-page',
-  imports: [RouterLink, RouterLinkActive, LucideAngularModule, MainButtonComponent, ReactiveFormsModule, InputTextModule, InputNumberModule, ChangeEmailFlowComponent],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule, MainButtonComponent, ReactiveFormsModule, InputTextModule, InputNumberModule, ChangeEmailFlowComponent, DeleteAccountModalComponent],
   templateUrl: './account-page.component.html',
   styleUrl: './account-page.component.css',
 })
@@ -32,11 +33,11 @@ export class AccountPageComponent implements OnInit {
   submitButtonFlag: WritableSignal<boolean> = signal<boolean>(true);
   private readonly router = inject(Router);
 
-  constructor(){
-    effect(()=>{
-      if(this.modalFlag.emailModalFlag()){
+  constructor() {
+    effect(() => {
+      if (this.modalFlag.emailModalFlag()) {
         console.log('modal opened');
-      }else{
+      } else {
         this.profileForm.get('email')?.setValue(this.userProfileService.userProfileData().email);
         console.log('modal closed');
       }
@@ -77,30 +78,18 @@ export class AccountPageComponent implements OnInit {
     }
   }
 
-  showModal(): void {
-    this.modalFlag.emailModalFlag.set(true)
+  showEmailModal(): void {
+    this.modalFlag.emailModalFlag.set(true);
   }
 
-  signOut():void {
+  showDeleteModal(): void {
+    this.modalFlag.deleteAccountFlag.set(true);
+  }
+
+  signOut(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
-
-  // this will be in the delete account modal .. take modallayout from the change email flow and figma
-
-  // deleteAccountForEver():void{
-  //   this.userProfileService.deleteAccount().subscribe({
-  //     next: (res)=>{
-  //       console.log(res.message);
-  //       localStorage.removeItem('token');
-  //       this.router.navigate(['/login']);
-  //     },
-  //     error: (err)=>{
-  //       console.log(err);
-  //     }
-  //   })
-  // }
-
 
 
 
