@@ -1,7 +1,24 @@
 <div class="p-4 bg-white">
+    @if(diplomaExams().length !== 0){
     @for(exam of diplomaExams();track $index){
     <div class="mb-2">
         <app-exam-card [examData]="exam"></app-exam-card>
+    </div>
+    }
+    }@else {
+    <div class="flex flex-col items-center justify-center w-full gap-4 bg-gray-50 shadow-2xl p-5">
+        <div class="icon-container bg-blue-50 p-3 rounded-full">
+            <div
+                class="icon flex items-center justify-center w-full p-3 rounded-full shadow-2xl shadow-blue-600 text-blue-600 font-medium">
+                <span class="pi pi-exclamation-triangle"></span>
+            </div>
+        </div>
+        <span class="text-gray-500 text-[16px] font-light">it seems that this diploma currently doesn't contain any
+            exam, you can check other diplomas through the link below</span>
+        <div class="button-container w-full flex items-center justify-center">
+            <app-main-button [btnClass]="'1'" [content]="'Explore'"
+                (buttonClick)="getBackToDiplomas()"></app-main-button>
+        </div>
     </div>
     }
 </div>

@@ -2,12 +2,13 @@ import { DiplomaExamsService } from './services/diploma-exams.service';
 import { Component, inject, OnInit, PLATFORM_ID, signal, WritableSignal } from '@angular/core';
 import { ExamCardComponent } from "./components/exam-card/exam-card.component";
 import { isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Exam } from './interfaces/diploma-exams-res.interface';
+import { MainButtonComponent } from "../../../../shared/components/main-button/main-button.component";
 
 @Component({
   selector: 'app-exams-page',
-  imports: [ExamCardComponent],
+  imports: [ExamCardComponent, MainButtonComponent],
   templateUrl: './exams-page.component.html',
   styleUrl: './exams-page.component.css',
 })
@@ -16,6 +17,7 @@ export class ExamsPageComponent implements OnInit {
   private readonly examsService = inject(DiplomaExamsService);
   private readonly plat_id = inject(PLATFORM_ID);
   private readonly activeRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   diplomaIdForExams: WritableSignal<string> = signal<string>('');
   diplomaExams: WritableSignal<Exam[]> = signal<Exam[]>([]);
 
@@ -47,4 +49,7 @@ export class ExamsPageComponent implements OnInit {
     }
   }
 
+  getBackToDiplomas():void{
+    this.router.navigate(['/home/diplomas']);
+  }
 }
