@@ -1,4 +1,4 @@
-<div class="grid grid-cols-12 gap-4 items-stretch">
+<div class="grid grid-cols-12 gap-4 h-full">
     <div class="account-sidebar col-span-4 bg-white p-5 flex flex-col justify-between grow">
         <ul class="main-buttons">
             <li class="cursor-pointer"><a class="p-4 flex text-gray-500 font-light " [routerLink]="'/home/account'"
@@ -16,65 +16,76 @@
                     [img]="logOut"></lucide-angular><span class="ms-2">Logout</span></a>
         </div>
     </div>
-    <form class="profile-form col-span-8 bg-white p-5 grid grid-cols-12 gap-3" [formGroup]="profileForm"
-        (ngSubmit)="changeProfileData()">
-        <div class="card flex justify-center col-span-6 mb-3">
-            <div class="flex w-full flex-col gap-2">
-                <label for="firstName">First Name</label>
-                <input class="w-full" pInputText id="firstName" formControlName="firstName"
-                    aria-describedby="firstname" />
-            </div>
-        </div>
-        <div class="card flex justify-center col-span-6 mb-3">
-            <div class="flex w-full flex-col gap-2">
-                <label for="lastName">Last Name</label>
-                <input class="w-full" pInputText id="lastName" formControlName="lastName" aria-describedby="lastname" />
-            </div>
-        </div>
-        <div class="card flex justify-center col-span-12 mb-3">
-            <div class="flex flex-col gap-2 w-full">
-                <label for="userName">Username</label>
-                <input class="w-full" pInputText id="userName" formControlName="username" aria-describedby="username" />
-            </div>
-        </div>
-        <div class="card flex justify-center col-span-12 mb-3">
-            <div class="flex flex-col gap-2 w-full">
-                <div class="flex items-center justify-between">
-                    <label for="email">Email</label>
-                    <span class="text-blue-600 font-light flex items-center justify-evenly cursor-pointer"
-                        (click)="showEmailModal()"><lucide-angular [img]="pencil" [size]="20"></lucide-angular><span
-                            class="ms-2">change</span></span>
+    @if(!changePasswordFlag()){
+    <div class="col-span-8 bg-white p-5 flex items-start justify-center">
+        <form class="profile-form grid grid-cols-12 gap-x-3 gap-y-4 w-full shrink-0" [formGroup]="profileForm"
+            (ngSubmit)="changeProfileData()">
+            <div class="card flex justify-center col-span-6">
+                <div class="flex w-full flex-col gap-1">
+                    <label for="firstName">First Name</label>
+                    <input class="w-full" pInputText id="firstName" formControlName="firstName"
+                        aria-describedby="firstname" />
                 </div>
-                <input class="w-full" pInputText id="email" formControlName="email" aria-describedby="email" />
             </div>
-        </div>
-        <div class="card flex justify-center col-span-12 mb-3">
-            <div class="flex w-full flex-col gap-2">
-                <label class="block" for="phoneNumber">Phone</label>
-                <input type="text" pInputText id="phoneNumber" pKeyFilter="int" class="w-full" formControlName="phone"
-                    maxlength="11" />
+            <div class="card flex justify-center col-span-6">
+                <div class="flex w-full flex-col gap-1">
+                    <label for="lastName">Last Name</label>
+                    <input class="w-full" pInputText id="lastName" formControlName="lastName"
+                        aria-describedby="lastname" />
+                </div>
             </div>
-        </div>
-        <div class="col-span-12 buttons-container grid grid-cols-12 gap-3">
-            <div class="col-span-6">
-                <app-main-button [btnClass]="'5'" [content]="'Delete Account'" (buttonClick)="showDeleteModal()"></app-main-button>
+            <div class="card flex justify-center col-span-12">
+                <div class="flex flex-col gap-1 w-full">
+                    <label for="userName">Username</label>
+                    <input class="w-full" pInputText id="userName" formControlName="username"
+                        aria-describedby="username" />
+                </div>
             </div>
-            <div class="col-span-6">
-                <app-main-button [btnClass]="'1'" [content]="'Save Changes'" [disabledFlag]="!submitButtonFlag()"
-                    [buttonType]="'submit'"></app-main-button>
+            <div class="card flex justify-center col-span-12">
+                <div class="flex flex-col gap-1 w-full">
+                    <div class="flex items-center justify-between">
+                        <label for="email">Email</label>
+                        <span class="text-blue-600 font-light flex items-center justify-evenly cursor-pointer"
+                            (click)="showEmailModal()"><lucide-angular [img]="pencil" [size]="20"></lucide-angular><span
+                                class="ms-2">change</span></span>
+                    </div>
+                    <input class="w-full" pInputText id="email" formControlName="email" aria-describedby="email" />
+                </div>
             </div>
-        </div>
-    </form>
-</div>
-@if(modalFlag.emailModalFlag()){
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-[2px]">
-    <div class="relative w-full max-w-lg">
-        <app-change-email-flow></app-change-email-flow>
+            <div class="card flex justify-center col-span-12">
+                <div class="flex w-full flex-col gap-1">
+                    <label class="block" for="phoneNumber">Phone</label>
+                    <input type="text" pInputText id="phoneNumber" pKeyFilter="int" class="w-full"
+                        formControlName="phone" maxlength="11" />
+                </div>
+            </div>
+            <div class="col-span-12 buttons-container grid grid-cols-12 gap-3">
+                <div class="col-span-6">
+                    <app-main-button [btnClass]="'5'" [content]="'Delete Account'"
+                        (buttonClick)="showDeleteModal()"></app-main-button>
+                </div>
+                <div class="col-span-6">
+                    <app-main-button [btnClass]="'1'" [content]="'Save Changes'" [disabledFlag]="!submitButtonFlag()"
+                        [buttonType]="'submit'"></app-main-button>
+                </div>
+            </div>
+        </form>
     </div>
+    @if(modalFlag.emailModalFlag()){
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-[2px]">
+        <div class="relative w-full max-w-lg">
+            <app-change-email-flow></app-change-email-flow>
+        </div>
+    </div>
+    }
+    @if(modalFlag.deleteAccountFlag()){
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-[2px]">
+        <app-delete-account-modal></app-delete-account-modal>
+    </div>
+    }
+    }@else {
+    <div class="col-span-8 bg-white p-5">
+        <router-outlet></router-outlet>
+    </div>
+    }
 </div>
-}
-@if(modalFlag.deleteAccountFlag()){
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-[2px]">
-    <app-delete-account-modal></app-delete-account-modal>
-</div>
-}

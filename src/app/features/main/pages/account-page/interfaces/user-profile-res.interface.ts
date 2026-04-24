@@ -32,3 +32,6 @@ export interface DeleteAccountRes {
     message: string
 }
 
+export interface ChangePassRes {
+    message: string
+}

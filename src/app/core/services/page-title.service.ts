@@ -11,6 +11,7 @@ export class PageTitleService {
   private routeTitles: Record<string, string> = {
     '/home/diplomas': 'Diplomas',
     '/home/account': 'Account Setting',
+    '/home/account/change-password': 'Change Password',
     '/home/dashboard': 'Dashboard',
   };
 

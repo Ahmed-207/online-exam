@@ -1,7 +1,7 @@
 export interface EditProfileReq {
-  firstName: string
-  lastName: string
-  phone: string
+    firstName: string
+    lastName: string
+    phone: string
 }
 
 export interface EditEmailReq {
@@ -10,4 +10,11 @@ export interface EditEmailReq {
 
 export interface VerifyEmailCodeReq {
     code: string
+}
+export interface ChangePasswordReq {
+
+    currentPassword: string,
+    newPassword: string,
+    confirmPassword: string
+
 }

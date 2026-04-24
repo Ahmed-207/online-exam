@@ -1,5 +1,5 @@
 import { Component, inject, input, InputSignal, OnInit, output, signal, WritableSignal } from '@angular/core';
-import { PasswordModule } from 'primeng/password';
+import { PasswordModule, Password } from 'primeng/password';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { Router } from '@angular/router';
 import { AuthService } from 'auth';
@@ -12,7 +12,7 @@ import { passwordMatchValidator } from '../../../../../../core/utilities/pass-ma
 
 @Component({
   selector: 'app-create-pass',
-  imports: [PasswordModule, MainButtonComponent, ReactiveFormsModule, AlertMessageComponent],
+  imports: [Password, PasswordModule, MainButtonComponent, ReactiveFormsModule, AlertMessageComponent],
   templateUrl: './create-pass.component.html',
   styleUrl: './create-pass.component.css',
 })
