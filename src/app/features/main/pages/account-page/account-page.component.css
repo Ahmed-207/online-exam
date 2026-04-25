@@ -12,7 +12,7 @@
     --p-inputtext-focus-border-color: blue;
 }
 
-:host ::ng-deep .p-toolbar{
+:host ::ng-deep .p-toolbar {
     width: 100%;
     display: flex;
     align-items: center;

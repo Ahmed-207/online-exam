@@ -5,15 +5,13 @@ import { environment } from '../../../../../../../environments/environment';
 import { passwordMatchValidator } from '../../../../../../core/utilities/pass-match.validator';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { AlertMessageComponent } from "../../../../../../shared/components/alert-message/alert-message.component";
-import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { UserProfileService } from '../../services/user-profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-change-password',
-  imports: [Password, PasswordModule, ReactiveFormsModule, MainButtonComponent, AlertMessageComponent, ToastModule],
-  providers: [MessageService],
+  imports: [Password, PasswordModule, ReactiveFormsModule, MainButtonComponent, AlertMessageComponent],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css',
 })

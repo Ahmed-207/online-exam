@@ -1,4 +1,4 @@
-import { Component, inject, input, InputSignal, OnInit, output, signal, WritableSignal } from '@angular/core';
+import { Component, inject, input, InputSignal, OnDestroy, OnInit, output, signal, WritableSignal } from '@angular/core';
 import { PasswordModule, Password } from 'primeng/password';
 import { MainButtonComponent } from "../../../../../../shared/components/main-button/main-button.component";
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { AlertMessageComponent } from "../../../../../../shared/components/alert
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../../../../environments/environment';
 import { passwordMatchValidator } from '../../../../../../core/utilities/pass-match.validator';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-pass',
@@ -16,17 +17,19 @@ import { passwordMatchValidator } from '../../../../../../core/utilities/pass-ma
   templateUrl: './create-pass.component.html',
   styleUrl: './create-pass.component.css',
 })
-export class CreatePassComponent implements OnInit {
+export class CreatePassComponent implements OnInit, OnDestroy {
 
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
   private readonly _fb = inject(FormBuilder);
+  private readonly messageService = inject(MessageService);
   storedRegisterData: InputSignal<{}> = input<{}>({});
   confirmPassForm!: FormGroup;
   buttonFlag: WritableSignal<boolean> = signal(false);
   errorFlag: WritableSignal<boolean> = signal(false);
   errorMsg: WritableSignal<string> = signal('');
   subscriptionRef: WritableSignal<Subscription> = signal(new Subscription);
+  timeOutRef:any;
 
   ngOnInit(): void {
 
@@ -54,7 +57,15 @@ export class CreatePassComponent implements OnInit {
           console.log(res);
           this.errorFlag.set(false);
           localStorage.setItem('token', res.payload.token);
-          this._router.navigate(['/home'])
+          this.messageService.add({
+            detail: `account created successfully, Welcome${res.payload.user.firstName}`,
+            key: 'br',
+            life: 1500,
+            icon: 'pi pi-check-circle'
+          });
+          this.timeOutRef = setTimeout(()=>{
+            this._router.navigate(['/home']);
+          }, 1000)
 
         },
         error: (err: HttpErrorResponse) => {
@@ -67,4 +78,7 @@ export class CreatePassComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    clearTimeout(this.timeOutRef);
+  }
 }

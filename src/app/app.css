@@ -1,0 +1,14 @@
+:host ::ng-deep .p-toast .p-toast-message {
+
+    background-color: oklch(21% 0.034 264.665);
+
+}
+
+::ng-deep .p-toast .p-toast-message-content .p-toast-summary,
+::ng-deep .p-toast .p-toast-message-content .p-toast-detail {
+    color: white !important;
+}
+
+:host ::ng-deep .p-toast .p-toast-message .p-toast-message-icon {
+    color: greenyellow;
+}

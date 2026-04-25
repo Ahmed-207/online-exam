@@ -6,6 +6,7 @@ import { MainButtonComponent } from '../../../../../../../../shared/components/m
 import { AlertMessageComponent } from '../../../../../../../../shared/components/alert-message/alert-message.component';
 import { UserProfileService } from '../../../../services/user-profile.service';
 import { ModalFlagService } from '../../../../services/modal-flag.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-verify-change-email',
@@ -27,6 +28,7 @@ export class VerifyChangeEmailComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly userProfileService = inject(UserProfileService);
   private readonly modalFlag = inject(ModalFlagService);
+  private readonly messageService = inject(MessageService);
 
   ngOnInit(): void {
 
@@ -53,7 +55,7 @@ export class VerifyChangeEmailComponent implements OnInit, OnDestroy {
         this.counterSet();
         console.log(res);
       },
-      error: (err: HttpErrorResponse)=>{
+      error: (err: HttpErrorResponse) => {
         this.errorFlag.set(true);
         this.errorMsg.set(err.message);
       }
@@ -70,6 +72,12 @@ export class VerifyChangeEmailComponent implements OnInit, OnDestroy {
           this.buttonFlag.set(false);
           this.errorFlag.set(false);
           console.log(res);
+          this.messageService.add({
+            detail: `email changed successfully`,
+            key: 'br',
+            life: 2000,
+            icon: 'pi pi-check-circle'
+          });
           this.modalFlag.emailModalFlag.set(false);
         },
         error: (err: HttpErrorResponse) => {

@@ -17,6 +17,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs/operators';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-account-page',
@@ -41,7 +42,8 @@ export class AccountPageComponent implements OnInit, OnDestroy {
   private readonly router = inject(Router);
   private readonly pageTitleService = inject(PageTitleService);
   private readonly breakpointObserver = inject(BreakpointObserver);
- 
+  private readonly messageService = inject(MessageService);
+
 
   isSmallScreen = toSignal(
     this.breakpointObserver.observe('(max-width: 800px)').pipe(
@@ -105,6 +107,12 @@ export class AccountPageComponent implements OnInit, OnDestroy {
           console.log(res);
           this.submitButtonFlag.set(true);
           this.userProfileService.userProfileData.set(res.payload.user);
+          this.messageService.add({
+            detail: `profile updated successfully, ${res.payload.user.firstName}`,
+            key: 'br',
+            life: 2000,
+            icon: 'pi pi-check-circle'
+          });
         },
         error: (err) => {
           console.log(err)

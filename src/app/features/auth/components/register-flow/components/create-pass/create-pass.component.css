@@ -1,13 +1,12 @@
-
-:host ::ng-deep .p-password-input{
+:host ::ng-deep .p-password-input {
     width: 100%;
     border-radius: 0;
 }
 
-:host ::ng-deep .p-password-input:focus{
-    --p-inputtext-focus-border-color:blue;
+:host ::ng-deep .p-password-input:focus {
+    --p-inputtext-focus-border-color: blue;
 }
 
-label{
+label {
     color: Gray;
 }
