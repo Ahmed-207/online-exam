@@ -7,6 +7,7 @@
                     routerLinkActive="bg-blue-50" [routerLinkActiveOptions]="{exact: true}" />
                 <p-button icon="pi pi-key" label="password" text severity="secondary"
                     routerLink="/home/account/change-password" routerLinkActive="bg-blue-50" />
+                <p-button icon="pi pi-sign-out" text severity="secondary" (click)="signOut()" />
             </ng-template>
         </p-toolbar>
     </div>
