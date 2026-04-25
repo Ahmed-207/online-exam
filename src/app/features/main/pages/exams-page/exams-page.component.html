@@ -1,4 +1,5 @@
 <div class="p-4 bg-white">
+    @defer ( when !isLoading()) {
     @if(diplomaExams().length !== 0){
     @for(exam of diplomaExams();track $index){
     <div class="mb-2">
@@ -20,6 +21,21 @@
                 (buttonClick)="getBackToDiplomas()"></app-main-button>
         </div>
     </div>
+    }
+    }@loading (minimum 1000ms) {
+    <div class="flex flex-col items-center justify-center w-full gap-4 bg-gray-50 shadow-2xl p-5">
+        <div class="icon-container bg-blue-50 p-3 rounded-full">
+            <div
+                class="icon flex items-center justify-center w-full p-3 rounded-full shadow-2xl shadow-blue-600 text-blue-600 font-medium">
+                <span class="pi pi-spinner"></span>
+            </div>
+        </div>
+        <span class="text-gray-500 text-[16px] font-light">loading exams ...</span>
+    </div>
+    }@placeholder {
+    @if (isLoading()) {
+    <div class="animate-pulse">Preparing exams...</div>
+    }
     }
 </div>
 <div #nextPageSentinel class="flex flex-col items-center justify-center p-8 mt-4 border-t border-gray-100">
