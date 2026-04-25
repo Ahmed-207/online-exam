@@ -11,3 +11,10 @@
 :host ::ng-deep .p-inputnumber:focus {
     --p-inputtext-focus-border-color: blue;
 }
+
+:host ::ng-deep .p-toolbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

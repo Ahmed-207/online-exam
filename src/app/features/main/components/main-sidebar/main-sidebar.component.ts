@@ -29,7 +29,7 @@ export class MainSidebarComponent implements OnInit {
 
     if (isPlatformBrowser(this.plat_id)) {
 
-      this.initiateMenuBar();
+      if (this.isSmallScreen()) this.initiateMenuBar();
 
     }
   }

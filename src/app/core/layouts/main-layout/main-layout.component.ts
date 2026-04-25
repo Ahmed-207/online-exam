@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MainSidebarComponent } from "../../../features/main/components/main-sidebar/main-sidebar.component";
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { MenuItem } from 'primeng/api';
 import { MainHeaderComponent } from "../../../features/main/components/main-header/main-header.component";
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from "@angular/router";
 import { PageTitleService } from '../../services/page-title.service';
@@ -25,8 +24,6 @@ export class MainLayoutComponent {
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly userProfileService = inject(UserProfileService);
 
-
-  home: MenuItem = { icon: 'pi pi-home', routerLink: '/' };
 
   ngOnInit() {
 

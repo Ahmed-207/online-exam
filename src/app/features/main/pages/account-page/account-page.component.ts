@@ -12,10 +12,15 @@ import { ChangeEmailFlowComponent } from "./components/change-email-flow/change-
 import { ModalFlagService } from './services/modal-flag.service';
 import { DeleteAccountModalComponent } from "./components/delete-account-modal/delete-account-modal.component";
 import { PageTitleService } from '../../../../core/services/page-title.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-account-page',
-  imports: [RouterLink, RouterLinkActive, LucideAngularModule, MainButtonComponent, ReactiveFormsModule, InputTextModule, InputNumberModule, ChangeEmailFlowComponent, DeleteAccountModalComponent, RouterOutlet],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule, MainButtonComponent, ReactiveFormsModule, InputTextModule, InputNumberModule, ChangeEmailFlowComponent, DeleteAccountModalComponent, RouterOutlet, ButtonModule, ToolbarModule],
   templateUrl: './account-page.component.html',
   styleUrl: './account-page.component.css',
 })
@@ -35,6 +40,15 @@ export class AccountPageComponent implements OnInit, OnDestroy {
   changePasswordFlag: WritableSignal<boolean> = signal<boolean>(false);
   private readonly router = inject(Router);
   private readonly pageTitleService = inject(PageTitleService);
+  private readonly breakpointObserver = inject(BreakpointObserver);
+ 
+
+  isSmallScreen = toSignal(
+    this.breakpointObserver.observe('(max-width: 800px)').pipe(
+      map(result => result.matches)
+    ),
+    { initialValue: false }
+  );
 
   constructor() {
     effect(() => {
@@ -56,6 +70,8 @@ export class AccountPageComponent implements OnInit, OnDestroy {
     });
     this.syncInternalState();
   }
+
+
 
 
   initiateProfileForm(): void {
