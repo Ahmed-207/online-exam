@@ -11,8 +11,8 @@ export class DiplomasService {
 
   private readonly httpClient = inject(HttpClient);
 
-  getAllDiplomas(): Observable<DiplomasRes> {
-    return this.httpClient.get<DiplomasRes>('https://exam-app.elevate-bootcamp.cloud/api/diplomas?page=1&limit=20', {
+  getAllDiplomas(pageIndex:number): Observable<DiplomasRes> {
+    return this.httpClient.get<DiplomasRes>(`https://exam-app.elevate-bootcamp.cloud/api/diplomas?page=${pageIndex}&limit=3`, {
       headers: {
         'Authorization': KEYS.tokenForRequests
       }

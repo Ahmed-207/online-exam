@@ -1,5 +1,15 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-    @for(diploma of diplomasForPage(); track $index){
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    @for(diploma of diplomasForPage(); track diploma.id){
     <app-diploma-card [diplomaCardData]="diploma" [diplomaId]="diploma.id"></app-diploma-card>
+    }
+</div>
+
+<div #nextPageSentinel class="flex flex-col items-center justify-center p-8 mt-4 border-t border-gray-100">
+    @if (isLoading()) {
+    <div class="animate-pulse text-gray-400">Loading more diplomas...</div>
+    } @else if(hasMoreData()){
+    <span class="text-gray-400 font-mono text-sm uppercase tracking-widest">
+        Scroll to view more
+    </span>
     }
 </div>

@@ -22,8 +22,8 @@ export class DiplomaExamsService {
   currentDiplomaTitle: WritableSignal<string> = signal<string>('');
   currentExamTime:WritableSignal<number> = signal<number>(0);
 
-  getAllDiplomaExams(id: string): Observable<DiplomaExamsRes> {
-    return this.httpClient.get<DiplomaExamsRes>(`https://exam-app.elevate-bootcamp.cloud/api/exams?diplomaId=${id}&page=1&limit=20`, {
+  getAllDiplomaExams(id: string, pageIndex: number): Observable<DiplomaExamsRes> {
+    return this.httpClient.get<DiplomaExamsRes>(`https://exam-app.elevate-bootcamp.cloud/api/exams?diplomaId=${id}&page=${pageIndex}&limit=5`, {
       headers: {
         'Authorization': KEYS.tokenForRequests
       }
