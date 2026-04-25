@@ -43,6 +43,7 @@ export class AccountPageComponent implements OnInit, OnDestroy {
   private readonly pageTitleService = inject(PageTitleService);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly messageService = inject(MessageService);
+  routerSub!: Subscription;
 
 
   isSmallScreen = toSignal(
@@ -65,14 +66,13 @@ export class AccountPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initiateProfileForm();
-    this.router.events.pipe(
+    this.routerSub = this.router.events.pipe( // Assign it
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.syncInternalState();
     });
     this.syncInternalState();
   }
-
 
 
 
@@ -137,6 +137,9 @@ export class AccountPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.changePasswordFlag.set(false);
+    if (this.routerSub) {
+      this.routerSub.unsubscribe(); // Clean up!
+    }
   }
 
 }
