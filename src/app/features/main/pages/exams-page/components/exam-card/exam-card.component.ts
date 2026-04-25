@@ -41,6 +41,7 @@ export class ExamCardComponent {
 
     this.router.navigate([this.examId()], { relativeTo: this.activeRoute });
     this.examService.currentExamTitle.set(this.examData().title);
+    this.examService.currentDiplomaTitle.set(this.examData().diploma.title);
     this.examService.currentExamTime.set(this.examData().duration);
     this.pageTitle.updateTitle(this.examData().title);
 
